@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RedisRepository.Interfaces;
 
 namespace WebApp
 {
@@ -30,8 +31,19 @@ namespace WebApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+
+            //DI ~ Appsettings
+            var appSettings = new ConfigurationBuilder()
+             .AddJsonFile("appsettings.json", true, true)
+             .Build();
+
+            var redisConnection = (Environment.GetEnvironmentVariable("REDIS_CONNECTION") ?? appSettings["AppSettings:RedisConnection"]);
+
+            services.AddTransient<IRedisRepository>(sp => new RedisRepository.RedisRepository(redisConnection));
+            services.AddTransient<IRedisRepositorySet>(sp => new RedisRepository.RedisRepositorySet(redisConnection));
+            services.AddTransient<IRedisRepositorySortedSet>(sp => new RedisRepository.RedisRepositorySortedSet(redisConnection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

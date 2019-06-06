@@ -22,17 +22,10 @@ namespace RedisRepository.Interfaces
         IList<string> SelectList(string key);
 
         /// <summary>
-        /// SCAN
+        /// StackExchange.Redis.SortedSetRangeByRankWithScores
         /// 
-        ///     https://redis.io/commands/scan
-        ///     
-        /// </summary>
-        /// <param name="keyMatch">Wildcard to match partial key, example "AP:201401:*"</param>
-        /// <returns></returns>
-        IList<string> SelectListOfKeysLike(string keyMatch);
-
-        /// <summary>
-        /// StackExchange.Redis.SortedSetRangeByValue
+        ///     https://redis.io/commands/zrange
+        /// 
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>

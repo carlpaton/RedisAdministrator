@@ -3,10 +3,15 @@ Application to help admin a redis instance, while developing I used redis-comman
 
 # Redis types
 
+https://redis.io/topics/data-types
+
 * Set
   * Redis Sets are an unordered collection of strings. In Redis, you can add, remove, and test for the existence of members in O(1) time complexity. 
 * Sorted Set
   * Redis Sorted Sets are similar to Redis Sets, non-repeating collections of Strings. The difference is, every member of a Sorted Set is associated with a score, that is used in order to take the sorted set ordered, from the smallest to the greatest score. While members are unique, the scores may be repeated.
+
+In the `Redis Administrator` code base the following types have not as yet been touched/used.
+
 * String
 * List
 * Hash
@@ -21,21 +26,24 @@ These live in `RedisRepository`
 * Clear
   * StackExchange.Redis.FlushAllDatabases; WARNING!! This will flush all keys on ALL endpoints.
 * Delete
-  * StackExchange.Redis.KeyDelete
+  * StackExchange.Redis.KeyDelete; Delete by key; https://redis.io/commands/del
 * Exists
-  * StackExchange.Redis.KeyExists; Checks if the given key exists.
+  * StackExchange.Redis.KeyExists; Checks if the given key exists. https://redis.io/commands/exists
 * Info
+  * INFO; https://redis.io/commands/INFO
 * SetTimeToLive
-  * StackExchange.Redis.KeyExpire; Set a timeout on key. After the timeout has expired, the key will automatically be deleted. A key with an associated timeout is said to be volatile in Redis terminology.
+  * StackExchange.Redis.KeyExpire; Set a timeout on key. After the timeout has expired, the key will automatically be deleted. A key with an associated timeout is said to be volatile in Redis terminology; https://redis.io/commands/expire
+* SelectListOfKeysLike
+  * SCAN; https://redis.io/commands/scan
 
 #### Set Type 
 
 These live in `RedisRepositorySet`
 
 * Insert
-  * StackExchange.Redis.StringSet; Set key to hold the string value. If key already holds a value, it is overwritten, regardless of its type.
+  * StackExchange.Redis.StringSet; Set key to hold the string value. If key already holds a value, it is overwritten, regardless of its type. https://redis.io/commands/set
 * Select
-  * StackExchange.Redis.StringGet
+  * StackExchange.Redis.StringGet; https://redis.io/commands/get
 
 #### Sorted Set Type
 
@@ -45,12 +53,8 @@ These live in `RedisRepositorySortedSet`
   * StackExchange.Redis.SortedSetAdd; https://redis.io/commands/zadd
 * SelectList
   * StackExchange.Redis.SortedSetRangeByValue
-* SelectListOfKeysLike
-  * SCAN; https://redis.io/commands/scan
 * SelectListRecordWithScore
-  * StackExchange.Redis.SortedSetAdd; https://redis.io/commands/zadd
-
-
+  * StackExchange.Redis.SortedSetRangeByRankWithScores; https://redis.io/commands/zadd
 
 ## ConsoleApp
 

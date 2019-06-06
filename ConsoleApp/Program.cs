@@ -16,7 +16,7 @@ namespace ConsoleApp
             redisRepository.Clear();
 
             //Info
-            Console.WriteLine(redisRepository.Info());
+            Console.WriteLine(redisRepository.Info(RedisRepository.enums.InfoEnum.Info.memory));
 
             // Insert then Delete
             redisRepositorySet.Insert("123:456:foo_bar_1", InsertDummyData.GetListWithTenValues());
@@ -47,7 +47,7 @@ namespace ConsoleApp
             Console.WriteLine(string.Join(" ", redisRepositorySortedSet.SelectList("123:456:foo_bar_6")));
 
             // SelectListOfKeysLike
-            Console.WriteLine(string.Join(" ", redisRepositorySortedSet.SelectListOfKeysLike("123:*")));
+            Console.WriteLine(string.Join(" ", redisRepository.SelectListOfKeysLike("123:*")));
 
             // Insert, SelectRecordWithScore
             redisRepositorySortedSet.Insert("1:2:foo_bar_7", InsertDummyData.GetListWithTenValues());

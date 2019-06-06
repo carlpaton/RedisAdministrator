@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using RedisRepository.Interfaces;
 using StackExchange.Redis;
 
@@ -35,37 +34,6 @@ namespace RedisRepository
             }
 
             return list;
-        }
-
-        public IList<string> SelectListOfKeysLike(string keyMatch)
-        {
-            var list = new List<string>();
-
-            int nextCursor = 0;
-            do
-            {
-                var redisResult = _db.Execute("SCAN", new object[] { nextCursor.ToString(), "MATCH", keyMatch, "COUNT", "1000" });
-                var innerResult = (RedisResult[])redisResult;
-                nextCursor = int.Parse((string)innerResult[0]);
-                var resultLines = ((string[])innerResult[1]).ToList();
-                list.AddRange(resultLines);
-            }
-            while (nextCursor != 0);
-
-            return list;
-
-
-            // All documentation I see online and in SE.Readis warns about the use of `Keys`
-            // This did however seem to return the `VALUE` of the KVP so may be useful on smaller db's?
-            //var endpoints = _connectionMultiplexer.GetEndPoints(true);
-            //foreach (var endpoint in endpoints)
-            //{
-            //    var server = _connectionMultiplexer.GetServer(endpoint);
-            //    foreach(var key in server.Keys(pattern: keyMatch)) 
-            //    {
-                  
-            //    }
-            //}
         }
 
         public List<Tuple<double, string>> SelectListRecordWithScore(string key)

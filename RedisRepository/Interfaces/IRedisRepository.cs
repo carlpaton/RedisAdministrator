@@ -1,4 +1,7 @@
-﻿namespace RedisRepository.Interfaces
+﻿using RedisRepository.enums;
+using System.Collections.Generic;
+
+namespace RedisRepository.Interfaces
 {
     /// <summary>
     /// Should work with all Redis types.
@@ -16,7 +19,7 @@
         /// <summary>
         /// StackExchange.Redis.KeyDelete
         /// 
-        ///     Delete by key.
+        ///     Delete by key; https://redis.io/commands/del
         /// 
         /// </summary>
         /// <param name="key"></param>
@@ -25,7 +28,7 @@
         /// <summary>
         /// StackExchange.Redis.KeyExists
         /// 
-        ///     Checks if the given key exists.
+        ///     Checks if the given key exists; https://redis.io/commands/exists
         ///     
         /// </summary>
         /// <param name="key"></param>
@@ -37,7 +40,7 @@
         /// 
         ///     Set a timeout on key. After the timeout has expired, the key will automatically
         ///     be deleted. A key with an associated timeout is said to be volatile in Redis
-        ///     terminology.
+        ///     terminology. https://redis.io/commands/expire
         ///     
         /// </summary>
         /// <param name="key"></param>
@@ -47,8 +50,25 @@
 
         /// <summary>
         /// INFO
+        /// 
+        ///     The INFO command returns information and statistics about the server in a format that is simple to parse by computers and easy to read by humans.
+        ///     https://redis.io/commands/INFO
+        /// 
         /// </summary>
+        /// <param name="infoParameter">Option to filter by a specific section of information; example: MEMORY</param>
         /// <returns></returns>
-        string Info();
+        string Info(InfoEnum.Info infoParameter = InfoEnum.Info.all);
+    
+        /// <summary>
+        /// SCAN
+        /// 
+        ///     Returns value is an array of two values: the first value is the new cursor to use in the next call, the second value is an array of elements (these are the redis keys)
+        ///     https://redis.io/commands/scan
+        ///     
+        /// </summary>
+        /// <param name="keyMatch">Wildcard to match partial key, example "AP:201401:*"</param>
+        /// <param name="count">While SCAN does not provide guarantees about the number of elements returned at every iteration, it is possible to empirically adjust the behavior of SCAN using the COUNT option. Basically with COUNT the user specified the amount of work that should be done at every call in order to retrieve elements from the collection. This is just a hint for the implementation, however generally speaking this is what you could expect most of the times from the implementation.</param>
+        /// <returns></returns>
+        IList<string> SelectListOfKeysLike(string keyMatch, int count = 1000);
     }
 }

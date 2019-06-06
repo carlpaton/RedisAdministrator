@@ -13,7 +13,7 @@
         /// StackExchange.Redis.StringSet
         /// 
         ///     Set key to hold the string value. If key already holds a value, it is overwritten,
-        ///     regardless of its type.
+        ///     regardless of its type; https://redis.io/commands/get
         /// 
         /// </summary>
         /// <param name="key"></param>
@@ -25,6 +25,9 @@
 
         /// <summary>
         /// StackExchange.Redis.StringGet
+        /// 
+        ///     https://redis.io/commands/set
+        /// 
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>

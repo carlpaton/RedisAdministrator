@@ -1,6 +1,38 @@
 # Redis Administrator
 Application to help admin a redis instance, while developing I used redis-commander which is an AWESOME piece of software!
 
+### Example Docker Image Usage
+
+1. Create your own bridge network
+
+   ```
+   docker network create --driver bridge redis-bridge-network
+   ```
+
+2. Spin up a `redis server` if you don't have one
+
+   ```
+   docker run --name red-srv -d -p 6379:6379 --network redis-bridge-network redis:4.0.5-alpine redis-server --appendonly yes
+   ```
+
+3. Spin up `redis administrator` and access from http://127.0.0.1:8080
+
+   ```
+   docker run --name red-admin -d -p 8080:80 --network redis-bridge-network --env REDIS_CONNECTION=red-srv  carlpaton/redis-administrator:latest
+   ```
+
+4. Access from http://127.0.0.1:8080
+
+5. Cleanup
+
+   ```
+   docker kill red-srv
+   docker rm red-srv
+   docker kill red-admin
+   docker rm red-admin
+   docker network rm redis-bridge-network
+   ```
+
 # Redis types
 
 https://redis.io/topics/data-types

@@ -1,30 +1,28 @@
 ﻿using ConsoleApp.Models;
 using Newtonsoft.Json;
-using RedisRepository.Interfaces;
 using System;
 using System.Collections.Generic;
 
 namespace ConsoleApp.Service
 {
-    public class InsertCA
+    public static class InsertDummyData
     {
-        private readonly IRedisRepository _redisService;
-        private readonly string _value;
-
-        public InsertCA(IRedisRepository redisService)
+        public static string GetOneValue()
         {
-            _redisService = redisService;
-            _value = CreateDummyList();
+            var value = new DummyClass()
+            { 
+                Id = new Random().Next(1, 9999),
+                SomeGuid = Guid.NewGuid().ToString(),
+                DateTime = DateTime.Now       
+            };
+            
+            return JsonConvert.SerializeObject(value);
         }
 
-        public void Insert(string key)
-        {
-            _redisService.Insert(key, _value);
-        }
-
-        private string CreateDummyList()
+        public static string GetListWithTenValues()
         {
             var list = new List<DummyClass>();
+            
             for (int i = 0; i < 10; i++)
             {
                 list.Add(new DummyClass()
@@ -33,7 +31,8 @@ namespace ConsoleApp.Service
                     SomeGuid = Guid.NewGuid().ToString(),
                     DateTime = DateTime.Now.AddDays(i),
                 });
-            }
+            }  
+            
             return JsonConvert.SerializeObject(list);
         }
     }

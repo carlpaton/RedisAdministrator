@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Service\ExistsCA.cs" />
+    <Compile Remove="Service\SelectCA.cs" />
+    <Compile Remove="Service\SetTTLCA.cs" />
+    <Compile Remove="Service\UpdateCA.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 

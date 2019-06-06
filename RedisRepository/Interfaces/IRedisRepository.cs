@@ -1,38 +1,54 @@
 ﻿namespace RedisRepository.Interfaces
 {
+    /// <summary>
+    /// Should work with all Redis types.
+    /// </summary>
     public interface IRedisRepository
     {
         /// <summary>
-        /// Flush all databases
+        /// StackExchange.Redis.FlushAllDatabases
+        /// 
+        ///     WARNING!! This will flush all keys on ALL endpoints.
+        ///     
         /// </summary>
         void Clear();
+
+        /// <summary>
+        /// StackExchange.Redis.KeyDelete
+        /// 
+        ///     Delete by key.
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
         void Delete(string key);
-        void Insert(string key, string value);
 
-        string Select(string key);
-
+        /// <summary>
+        /// StackExchange.Redis.KeyExists
+        /// 
+        ///     Checks if the given key exists.
+        ///     
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         bool Exists(string key);
 
         /// <summary>
-        /// SortedSetAdd
+        /// StackExchange.Redis.KeyExpire
         /// 
-        /// https://redis.io/commands/zadd
+        ///     Set a timeout on key. After the timeout has expired, the key will automatically
+        ///     be deleted. A key with an associated timeout is said to be volatile in Redis
+        ///     terminology.
+        ///     
         /// </summary>
         /// <param name="key"></param>
-        /// <param name="value"></param>
+        /// <param name="cacheMinuteTimeout"></param>
         /// <returns></returns>
-        bool Update(string key, string value);
+        bool SetTimeToLive(string key, double cacheMinuteTimeout);
 
         /// <summary>
-        /// KeyExpire
-        /// 
-        //     Set a timeout on key. After the timeout has expired, the key will automatically
-        //     be deleted. A key with an associated timeout is said to be volatile in Redis
-        //     terminology.
-        //
+        /// INFO
         /// </summary>
-        /// <param name="key"></param>
         /// <returns></returns>
-        bool SetTTL(string key);
+        string Info();
     }
 }

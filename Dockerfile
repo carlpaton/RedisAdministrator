@@ -20,5 +20,5 @@ RUN dotnet publish -c Release -o out
 # Build runtime image
 FROM microsoft/dotnet:aspnetcore-runtime
 WORKDIR /app
-COPY --from=build-env /app/Web/out .
+COPY --from=build-env /app/WebApp/out .
 ENTRYPOINT ["dotnet", "WebApp.dll"]

@@ -5,7 +5,7 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-@using (Html.BeginForm("Default", "RedisSaveSearch", FormMethod.Post))
+@using (Html.BeginForm("Index", "Info", FormMethod.Post))
 {
     @Html.HiddenFor(model => model.Info)
 
@@ -18,3 +18,9 @@
         <span style="white-space: pre-line">@Html.Raw(Model.Info)</span>
     </p>
 }
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://redis.io/commands/INFO" target="_blank">INFO command</a></li>
+</ul>

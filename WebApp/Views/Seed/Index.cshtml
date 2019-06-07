@@ -1,0 +1,62 @@
+﻿@model SeedDummyInfoViewModel
+
+@{
+    ViewData["Title"] = "Seed Data";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    If your Redis database is new it may be helpul to seed it with some dummy data for testing.
+    You can quickly spin up a Redis Server using its <a href="https://hub.docker.com/_/redis" target="_blank">docker image</a>.
+</p>
+
+<h3>Sets Data Type</h3>
+
+<p>
+    This will insert <code>n</code> number of `Sets` with <code>y</code> number of values, the values here are serialized instances of <a href="https://github.com/carlpaton/RedisAdministrator/blob/master/Common/DummyData/DummyClass.cs" target="_blank">DummyClass</a>.
+</p>
+<p>
+    Suggested redis keys are `object-type:id`, for this insert it will be `seed_set:1` where 1 iterates to teh given <code>n</code> number of `Sets`.
+</p>
+
+@using (Html.BeginForm("Index", "Seed", FormMethod.Post))
+{
+    <div class="form-group row">
+        @Html.LabelFor(model => model.KeyCount, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.KeyCount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(Model => Model.KeyCount, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.ValueCount, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.ValueCount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(Model => Model.ValueCount, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-2 col-sm-10">
+            <input type="submit" value="Insert" class="btn btn-primary" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-2 col-sm-10">
+            @if (TempData["seed-index-post-ok"] != null)
+            {
+                var message = (MessageViewModel)TempData["seed-index-post-ok"];
+                <div class="alert @message.CssClassName" role="alert">
+                    <strong>@message.Title</strong>
+                    @message.Message
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://redis.io/topics/data-types-intro" target="_blank">Redis keys</a></li>
+    <li><a href="https://redis.io/topics/data-types" target="_blank">Data types</a></li>
+</ul>

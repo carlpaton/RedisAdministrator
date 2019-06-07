@@ -18,11 +18,11 @@ namespace Common.DummyData
             return JsonConvert.SerializeObject(value);
         }
 
-        public static string GetListWithTenValues()
+        public static string GetListWithNValues(int numberOfObjects)
         {
             var list = new List<DummyClass>();
             
-            for (int i = 0; i < 10; i++)
+            for (int i = 1; i <= numberOfObjects; i++)
             {
                 list.Add(new DummyClass()
                 {

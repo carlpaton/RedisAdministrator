@@ -31,6 +31,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Info">Info</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Seed">Seed</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -45,10 +48,12 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - WebApp
+            &copy; @DateTime.Now.ToString("yyyy") - Redis Administrator
             : <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            : <a href="https://github.com/carlpaton/RedisAdministrator/" target="_blank">GIT</a>
-            : <a href="https://hub.docker.com/r/carlpaton/redis-administrator/" target="_blank">Docker</a>
+            : <a href="https://github.com/carlpaton/RedisAdministrator/" target="_blank">GIT Source Code</a>
+            : <a href="https://hub.docker.com/r/carlpaton/redis-administrator/" target="_blank">Docker Image</a>
+            : <a href="https://redis.io/documentation" target="_blank">Redis Docs</a>
+            : Powered by <a href="https://getbootstrap.com/docs/4.0/getting-started/introduction/" target="_blank">Bootstrap</a>
         </div>
     </footer>
 

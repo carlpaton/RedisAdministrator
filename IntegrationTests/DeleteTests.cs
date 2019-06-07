@@ -25,7 +25,7 @@ namespace IntegrationTests
             // Arrange
             string expected = null;
             var key = $"123:delete:{Guid.NewGuid()}";
-            var value = DummyObjects.GetListWithTenValues();
+            var value = DummyObjects.GetListWithNValues(10);
             redisRepositorySet.Insert(key, value);
 
             // Act

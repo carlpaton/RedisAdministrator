@@ -28,7 +28,7 @@ namespace WebApp.Controllers
         { 
             if (viewModel.MemoryOnly)
             {
-                viewModel.Info = _redisRepository.Info(InfoEnum.Info.memory);
+                viewModel.Info = _redisRepository.Info(InfoEnum.Info.Memory);
             }
             return View(viewModel);          
         }

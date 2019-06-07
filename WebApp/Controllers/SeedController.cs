@@ -7,11 +7,11 @@ namespace WebApp.Controllers
 {
     public class SeedController : Controller
     {
-        private readonly IRedisRepositorySet _redisRepositorySet;
+        private readonly IRedisRepositoryString _redisRepositoryString;
 
-        public SeedController(IRedisRepositorySet redisRepositorySet)
+        public SeedController(IRedisRepositoryString redisRepositoryString)
         {
-            _redisRepositorySet = redisRepositorySet;
+            _redisRepositoryString = redisRepositoryString;
         }
 
         public IActionResult Index()
@@ -26,9 +26,9 @@ namespace WebApp.Controllers
             {
                 for (int i = 1; i <= viewModel.KeyCount; i++)
                 {
-                    var key = $"seed_set:{i}";
+                    var key = $"{i}:{i+1}:seed_string";
                     var value = DummyObjects.GetListWithNValues(viewModel.ValueCount);
-                    _redisRepositorySet.Insert(key, value);
+                    _redisRepositoryString.Insert(key, value);
                 }
 
                 // TODO, 

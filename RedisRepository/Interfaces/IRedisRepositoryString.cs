@@ -6,7 +6,7 @@
     ///     Strings are the most basic kind of Redis value. Redis Strings are binary safe, this means that a Redis string can contain any kind of data, for instance a JPEG image or a serialized Ruby object.
     ///     
     /// </summary>
-    interface IRedisRepositoryString
+    public interface IRedisRepositoryString
     {
         /// <summary>
         /// StackExchange.Redis.StringSet

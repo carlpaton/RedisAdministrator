@@ -10,13 +10,13 @@ namespace IntegrationTests
     {
         readonly string connection = "localhost:6379,allowAdmin=true";
         IRedisRepository redisRepository;
-        IRedisRepositorySet redisRepositorySet;
+        IRedisRepositoryString redisRepositoryString;
 
         [TestInitialize]
         public void TestInitialize()
         {
             redisRepository = new RedisRepository.RedisRepository(connection);
-            redisRepositorySet = new RedisRepository.RedisRepositorySet(connection);
+            redisRepositoryString = new RedisRepository.RedisRepositoryString(connection);
         }
 
         [TestMethod]
@@ -26,12 +26,12 @@ namespace IntegrationTests
             string expected = null;
             var key = $"123:delete:{Guid.NewGuid()}";
             var value = DummyObjects.GetListWithNValues(10);
-            redisRepositorySet.Insert(key, value);
+            redisRepositoryString.Insert(key, value);
 
             // Act
-            var insertedValue = redisRepositorySet.Select(key);
+            var insertedValue = redisRepositoryString.Select(key);
             redisRepository.Delete(key);
-            var actual = redisRepositorySet.Select(key);
+            var actual = redisRepositoryString.Select(key);
 
             // Assert
             Assert.AreEqual(insertedValue, value);

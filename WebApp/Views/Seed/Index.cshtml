@@ -10,13 +10,13 @@
     You can quickly spin up a Redis Server using its <a href="https://hub.docker.com/_/redis" target="_blank">docker image</a>.
 </p>
 
-<h3>Sets Data Type</h3>
+<h3>String Data Type</h3>
 
 <p>
-    This will insert <code>n</code> number of `Sets` with <code>y</code> number of values, the values here are serialized instances of <a href="https://github.com/carlpaton/RedisAdministrator/blob/master/Common/DummyData/DummyClass.cs" target="_blank">DummyClass</a>.
+    This will insert <code>n</code> number of `String` with <code>y</code> number of values, the values here are serialized instances of <a href="https://github.com/carlpaton/RedisAdministrator/blob/master/Common/DummyData/DummyClass.cs" target="_blank">DummyClass</a>.
 </p>
 <p>
-    Suggested redis keys are `object-type:id`, for this insert it will be `seed_set:1` where 1 iterates to teh given <code>n</code> number of `Sets`.
+    Suggested redis keys are `object-type:id`, for this insert it will be `1:2:seed_string` where 1 iterates to the given <code>n</code> number of `String`.
 </p>
 
 @using (Html.BeginForm("Index", "Seed", FormMethod.Post))

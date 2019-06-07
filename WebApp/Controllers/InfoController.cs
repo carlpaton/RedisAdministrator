@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RedisRepository.enums;
 using RedisRepository.Interfaces;
+using WebApp.Models;
 
 namespace WebApp.Controllers
 {
@@ -15,8 +16,21 @@ namespace WebApp.Controllers
 
         public IActionResult Index()
         {
-            var redisServerInformation = _redisRepository.Info(InfoEnum.Info.all);
-            return View();
+            var viewModel = new InfoViewModel()
+            {
+                Info = _redisRepository.Info(InfoEnum.Info.all)
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Index(InfoViewModel viewModel)
+        { 
+            if (viewModel.MemoryOnly)
+            {
+                viewModel.Info = _redisRepository.Info(InfoEnum.Info.memory);
+            }
+            return View(viewModel);          
         }
     }
 }

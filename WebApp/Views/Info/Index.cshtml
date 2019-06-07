@@ -1,8 +1,20 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model InfoViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@{
+    ViewData["Title"] = "Redis Server Information";
+}
+<h1>@ViewData["Title"]</h1>
+
+@using (Html.BeginForm("Default", "RedisSaveSearch", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Info)
+
+    <p>
+        Only display memory information
+        @Html.CheckBoxFor(model => model.MemoryOnly, new { onclick = "this.form.submit();" })
+    </p>
+
+    <p>
+        <span style="white-space: pre-line">@Html.Raw(Model.Info)</span>
+    </p>
+}

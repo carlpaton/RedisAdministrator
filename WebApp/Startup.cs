@@ -38,6 +38,7 @@ namespace WebApp
             var redisConnection = (Environment.GetEnvironmentVariable("REDIS_CONNECTION") ?? appSettings["AppSettings:RedisConnection"]);
 
             services.AddTransient<IRedisRepository>(sp => new RedisRepository.RedisRepository(redisConnection));
+            services.AddTransient<IRedisRepositoryString>(sp => new RedisRepository.RedisRepositoryString(redisConnection));
             services.AddTransient<IRedisRepositorySet>(sp => new RedisRepository.RedisRepositorySet(redisConnection));
             services.AddTransient<IRedisRepositorySortedSet>(sp => new RedisRepository.RedisRepositorySortedSet(redisConnection));
         }

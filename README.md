@@ -39,14 +39,15 @@ Application to help admin a redis instance, while developing I used redis-comman
 
 https://redis.io/topics/data-types
 
-* Set
-  * Redis Sets are an unordered collection of strings. In Redis, you can add, remove, and test for the existence of members in O(1) time complexity. 
+* String
+  * Strings are the most basic kind of Redis value. Redis Strings are binary safe, this means that a Redis string can contain any kind of data, for instance a JPEG image or a serialized Ruby object.
 * Sorted Set
   * Redis Sorted Sets are similar to Redis Sets, non-repeating collections of Strings. The difference is, every member of a Sorted Set is associated with a score, that is used in order to take the sorted set ordered, from the smallest to the greatest score. While members are unique, the scores may be repeated.
 
 In the `Redis Administrator` code base the following types have not as yet been touched/used.
 
-* String
+* Set
+  * Redis Sets are an unordered collection of strings. In Redis, you can add, remove, and test for the existence of members in O(1) time complexity. 
 * List
 * Hash
 * Stream
@@ -89,9 +90,9 @@ StackExchange.Redis.KeyExpire; Set a timeout on key. After the timeout has expir
 
 SCAN; https://redis.io/commands/scan
 
-#### Set Type 
+#### String Type 
 
-These live in `RedisRepositorySet`
+These live in `RedisRepositoryString`
 
 > Insert
 
@@ -100,6 +101,18 @@ StackExchange.Redis.StringSet; Set key to hold the string value. If key already 
 > Select
 
 StackExchange.Redis.StringGet; https://redis.io/commands/get
+
+#### Set Type 
+
+These live in `RedisRepositorySet`
+
+> Insert
+
+StackExchange.Redis.?; https://redis.io/commands/sadd
+
+> Select
+
+?
 
 #### Sorted Set Type
 

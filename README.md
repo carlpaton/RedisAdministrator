@@ -1,7 +1,7 @@
 # Redis Administrator
 Application to help admin a redis instance, while developing I used redis-commander which is an AWESOME piece of software!
 
-### Example Docker Image Usage
+## Example Docker Image Usage
 
 1. Create your own bridge network
 
@@ -51,48 +51,83 @@ In the `Redis Administrator` code base the following types have not as yet been 
 * Hash
 * Stream
 
+# Source Code
+
+These are the projects inside the `RedisAdministrator` solution.
+
+## WebApp
+
+.Net Core MVC web application, that's quite a mouthful!
+
 ## Repository
 
 #### Generic
 
 These live in `RedisRepository`
 
-* Clear
-  * StackExchange.Redis.FlushAllDatabases; WARNING!! This will flush all keys on ALL endpoints.
-* Delete
-  * StackExchange.Redis.KeyDelete; Delete by key; https://redis.io/commands/del
-* Exists
-  * StackExchange.Redis.KeyExists; Checks if the given key exists. https://redis.io/commands/exists
-* Info
-  * INFO; https://redis.io/commands/INFO
-* SetTimeToLive
-  * StackExchange.Redis.KeyExpire; Set a timeout on key. After the timeout has expired, the key will automatically be deleted. A key with an associated timeout is said to be volatile in Redis terminology; https://redis.io/commands/expire
-* SelectListOfKeysLike
-  * SCAN; https://redis.io/commands/scan
+> Clear
+
+StackExchange.Redis.FlushAllDatabases; WARNING!! This will flush all keys on ALL endpoints.
+
+> Delete
+
+StackExchange.Redis.KeyDelete; Delete by key; https://redis.io/commands/del
+
+> Exists
+
+StackExchange.Redis.KeyExists; Checks if the given key exists. https://redis.io/commands/exists
+
+> Info
+
+INFO; https://redis.io/commands/INFO
+
+> SetTimeToLive
+
+StackExchange.Redis.KeyExpire; Set a timeout on key. After the timeout has expired, the key will automatically be deleted. A key with an associated timeout is said to be volatile in Redis terminology; https://redis.io/commands/expire
+
+> SelectListOfKeysLike
+
+SCAN; https://redis.io/commands/scan
 
 #### Set Type 
 
 These live in `RedisRepositorySet`
 
-* Insert
-  * StackExchange.Redis.StringSet; Set key to hold the string value. If key already holds a value, it is overwritten, regardless of its type. https://redis.io/commands/set
-* Select
-  * StackExchange.Redis.StringGet; https://redis.io/commands/get
+> Insert
+
+StackExchange.Redis.StringSet; Set key to hold the string value. If key already holds a value, it is overwritten, regardless of its type. https://redis.io/commands/set
+
+> Select
+
+StackExchange.Redis.StringGet; https://redis.io/commands/get
 
 #### Sorted Set Type
 
 These live in `RedisRepositorySortedSet`
 
-* Insert
-  * StackExchange.Redis.SortedSetAdd; https://redis.io/commands/zadd
-* SelectList
-  * StackExchange.Redis.SortedSetRangeByValue
-* SelectListRecordWithScore
-  * StackExchange.Redis.SortedSetRangeByRankWithScores; https://redis.io/commands/zadd
+> Insert
 
-## ConsoleApp
+StackExchange.Redis.SortedSetAdd; https://redis.io/commands/zadd
 
-Pretty much an integration test harness (without the asserts) to test `RedisRepository`
+> SelectList
+
+StackExchange.Redis.SortedSetRangeByValue
+
+> SelectListRecordWithScore
+
+StackExchange.Redis.SortedSetRangeByRankWithScores; https://redis.io/commands/zadd
+
+## IntegrationTests
+
+Tests that were used during the repository development, true integration tests as they will indeed hit the supplied database.
+
+## UnitTests
+
+These are specified in the docker image build:
+
+`RUN dotnet test "./UnitTest/UnitTest.csproj" -c Release --no-build --no-restore`
+
+* <https://github.com/carlpaton/RedisAdministrator/blob/master/Dockerfile>
 
 # References
 

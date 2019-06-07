@@ -19,6 +19,12 @@
     Suggested redis keys are `object-type:id`, for this insert it will be `1:2:seed_string` where 1 iterates to the given <code>n</code> number of `String`.
 </p>
 
+<pre><code>&gt; set mykey somevalue
+OK
+&gt; get mykey
+"somevalue"
+</code></pre>
+
 @using (Html.BeginForm("Index", "Seed", FormMethod.Post))
 {
     <div class="form-group row">

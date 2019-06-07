@@ -5,10 +5,9 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-@using (Html.BeginForm("Index", "Info", FormMethod.Post))
-{
-    @Html.HiddenFor(model => model.Info)
-    @Html.HiddenFor(model => model.SelectedFilter)
+<form asp-action="Index" asp-controller="Info" method="post">
+    <input type="hidden" asp-for="Info" />
+    <input type="hidden" asp-for="SelectedFilter" />
 
     <div class="form-group row">
         <div class="col-sm-2 col-form-label">
@@ -22,8 +21,7 @@
     <p>
         <span style="white-space: pre-line">@Html.Raw(Model.Info)</span>
     </p>
-}
-
+</form>
 <h1>References</h1>
 
 <ul>
@@ -35,7 +33,7 @@
         $("#Filter").removeAttr("multiple"); //TODO: Fix this hack! `multiple` was added by the framework as the items `Model.Filter` are an Ienumerable
         $("#Filter").change(function () {
             $("#SelectedFilter").val($(this).val());
-            this.form.submit();   
+            this.form.submit();
         });
     });
 </script>

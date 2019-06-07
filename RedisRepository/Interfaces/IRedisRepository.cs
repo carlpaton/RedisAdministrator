@@ -57,7 +57,7 @@ namespace RedisRepository.Interfaces
         /// </summary>
         /// <param name="infoParameter">Option to filter by a specific section of information; example: MEMORY</param>
         /// <returns></returns>
-        string Info(InfoEnum.Info infoParameter = InfoEnum.Info.all);
+        string Info(InfoEnum.Info infoParameter = InfoEnum.Info.All);
     
         /// <summary>
         /// SCAN

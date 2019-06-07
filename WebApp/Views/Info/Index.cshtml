@@ -8,11 +8,16 @@
 @using (Html.BeginForm("Index", "Info", FormMethod.Post))
 {
     @Html.HiddenFor(model => model.Info)
+    @Html.HiddenFor(model => model.SelectedFilter)
 
-    <p>
-        Only display memory information
-        @Html.CheckBoxFor(model => model.MemoryOnly, new { onclick = "this.form.submit();" })
-    </p>
+    <div class="form-group row">
+        <div class="col-sm-2 col-form-label">
+            Filter
+        </div>
+        <div class="col-sm-10">
+            <select asp-for="Filter" asp-items="Model.Filter" class="form-control"></select>
+        </div>
+    </div>
 
     <p>
         <span style="white-space: pre-line">@Html.Raw(Model.Info)</span>
@@ -24,3 +29,14 @@
 <ul>
     <li><a href="https://redis.io/commands/INFO" target="_blank">INFO command</a></li>
 </ul>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Filter").removeAttr("multiple"); //TODO: Fix this hack! `multiple` was added by the framework as the items `Model.Filter` are an Ienumerable
+        $("#Filter").change(function () {
+            $("#SelectedFilter").val($(this).val());
+            this.form.submit();   
+        });
+    });
+</script>

@@ -4,7 +4,7 @@
     {
         public enum Info 
         { 
-            all, 
+            All, 
             Server,
             Clients,
             Memory,

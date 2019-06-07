@@ -38,9 +38,9 @@ namespace RedisRepository
             return _db.KeyExists(key);
         }
 
-        public string Info(InfoEnum.Info infoParameter = InfoEnum.Info.all)
+        public string Info(InfoEnum.Info infoParameter = InfoEnum.Info.All)
         {
-            if (infoParameter.Equals(InfoEnum.Info.all))
+            if (infoParameter.Equals(InfoEnum.Info.All))
                     return (string)_db.Execute("INFO");
 
            return (string)_db.Execute("INFO", new object[] { infoParameter.ToString() });

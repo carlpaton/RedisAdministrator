@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleApp.Models
+namespace Common.DummyData
 {
     public class DummyClass
     {

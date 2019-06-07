@@ -1,25 +1,8 @@
-﻿using System;
-
-namespace ConsoleApp
+﻿namespace IntegrationTests
 {
-    class Program
+    class InsertTests
     {
-        static void Main(string[] args)
-        {
-            //var connection = "localhost:6379,allowAdmin=true";
-            //var redisRepository = new RedisRepository.RedisRepository(connection);
-            //var redisRepositorySet = new RedisRepository.RedisRepositorySet(connection);
-            //var redisRepositorySortedSet = new RedisRepository.RedisRepositorySortedSet(connection);
-            
-            //// Clear
-            //redisRepository.Clear();
-
-            ////Info
-            //Console.WriteLine(redisRepository.Info(RedisRepository.enums.InfoEnum.Info.memory));
-
-            //// Insert then Delete
-            //redisRepositorySet.Insert("123:456:foo_bar_1", DummyObjects.GetListWithTenValues());
-            //redisRepository.Delete("123:456:foo_bar_1");
+        //TODO ~ flesh these tests out, abit backwards as they are not really needed anymore and focus should be on unit tests / new functionality.
 
             //// Insert with TTL/Timespan
             //double cacheMinuteTimeout = 1;
@@ -52,10 +35,5 @@ namespace ConsoleApp
             //redisRepositorySortedSet.Insert("1:2:foo_bar_7", InsertDummyData.GetListWithTenValues());
             //redisRepositorySortedSet.Insert("1:2:foo_bar_7", InsertDummyData.GetListWithTenValues());
             //var responseTuple = redisRepositorySortedSet.SelectListRecordWithScore("1:2:foo_bar_7");
-
-            //// I forget to CTRL-F5 -_-
-            //Console.WriteLine("DONE! \\:D/");
-            //Console.Read();
-        }
     }
 }

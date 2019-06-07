@@ -33,6 +33,8 @@ Application to help admin a redis instance, while developing I used redis-comman
    docker network rm redis-bridge-network
    ```
 
+* Also see <https://hub.docker.com/r/carlpaton/redis-administrator>
+
 # Redis types
 
 https://redis.io/topics/data-types

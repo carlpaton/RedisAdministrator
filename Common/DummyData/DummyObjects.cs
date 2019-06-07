@@ -1,11 +1,10 @@
-﻿using ConsoleApp.Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace ConsoleApp.Service
+namespace Common.DummyData
 {
-    public static class InsertDummyData
+    public class DummyObjects
     {
         public static string GetOneValue()
         {

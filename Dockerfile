@@ -3,12 +3,14 @@ WORKDIR /app
 
 # Copy csproj and restore as distinct layers
 COPY ./*.sln ./
+COPY ./Common/*.csproj ./Common/
 COPY ./ConsoleApp/*.csproj ./ConsoleApp/
 COPY ./RedisRepository/*.csproj ./RedisRepository/
 COPY ./WebApp/*.csproj ./WebApp/
 RUN dotnet restore
 
 # Copy everything else and build
+COPY ./Common/. ./Common/
 COPY ./ConsoleApp/. ./ConsoleApp/
 COPY ./RedisRepository/. ./RedisRepository/
 COPY ./WebApp/. ./WebApp/

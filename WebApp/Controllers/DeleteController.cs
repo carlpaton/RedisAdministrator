@@ -27,10 +27,18 @@ namespace WebApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _redisRepository.Delete(viewModel.KeyToDelete);
+                    if (_redisRepository.Exists(viewModel.KeyToDelete))
+                    {
+                        _redisRepository.Delete(viewModel.KeyToDelete);
 
-                    new SetTempDataMessage()
-                        .Display(TempData, "OK", $"The id {viewModel.KeyToDelete} has been removed.");
+                        new SetTempDataMessage()
+                            .Display(TempData, "OK", $"The key {viewModel.KeyToDelete} has been removed.");
+                    }
+                    else
+                    {
+                        new SetTempDataMessage()
+                            .Display(TempData, "Warning", $"Key {viewModel.KeyToDelete} was not found.", SetTempDataMessage.CssClassNameEnum.alert_warning);
+                    }
                 }
             }
             catch (Exception ex)

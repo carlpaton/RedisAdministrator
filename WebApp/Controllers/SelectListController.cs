@@ -26,7 +26,7 @@ namespace WebApp.Controllers
             if (ModelState.IsValid)
             {
                 var resultList = _redisRepository
-                    .SelectListOfKeysLike(viewModel.SearchOnKey, 1)
+                    .SelectListScan(viewModel.SearchOnKey, 1000)
                     .ToList();
 
                 viewModel.Result = string.Join(Environment.NewLine, resultList);

@@ -46,7 +46,24 @@ namespace RedisRepository
            return (string)_db.Execute("INFO", new object[] { infoParameter.ToString() });
         }
 
-        public IList<string> SelectListOfKeysLike(string keyMatch, int maxResultsSoftLimit = 1000)
+        public IList<string> SelectListKeys(string keyMatch)
+        {
+            var list = new List<string>();
+
+            var endpoints = _connectionMultiplexer.GetEndPoints(true);
+            foreach (var endpoint in endpoints)
+            {
+                var server = _connectionMultiplexer.GetServer(endpoint);
+                foreach (var key in server.Keys(pattern: keyMatch))
+                {
+                    list.Add(key);
+                }
+            }
+
+            return list;
+        }
+
+        public IList<string> SelectListScan(string keyMatch, int maxResultsSoftLimit = 1000)
         {
             var list = new List<string>();
 
@@ -65,18 +82,6 @@ namespace RedisRepository
             while (nextCursor != 0);
 
             return list;
-
-            // All documentation I see online and in SE.Readis warns about the use of `Keys`
-            // This did however seem to return the `VALUE` of the KVP so may be useful on smaller db's?
-            //var endpoints = _connectionMultiplexer.GetEndPoints(true);
-            //foreach (var endpoint in endpoints)
-            //{
-            //    var server = _connectionMultiplexer.GetServer(endpoint);
-            //    foreach(var key in server.Keys(pattern: keyMatch)) 
-            //    {
-                  
-            //    }
-            //}
         }
 
         public bool SetTimeToLive(string key, double cacheMinuteTimeout)

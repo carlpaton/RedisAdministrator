@@ -86,9 +86,14 @@ INFO; https://redis.io/commands/INFO
 
 StackExchange.Redis.KeyExpire; Set a timeout on key. After the timeout has expired, the key will automatically be deleted. A key with an associated timeout is said to be volatile in Redis terminology; https://redis.io/commands/expire
 
-> SelectListOfKeysLike
+> SelectListScan
 
 SCAN; https://redis.io/commands/scan
+
+> SelectListKeys
+
+Warning: consider KEYS as a command that should only be used in production environments with extreme care.
+StackExchange.Redis.Keys; https://redis.io/commands/keys
 
 #### String Type 
 

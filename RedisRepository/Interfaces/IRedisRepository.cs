@@ -75,6 +75,24 @@ namespace RedisRepository.Interfaces
         /// <param name="keyMatch">Wildcard to match partial key, example "AP:201401:*"</param>
         /// <param name="maxResultsSoftLimit">The max amount of records to return. Helps with performance should users try search on a single wildcard like `*`. It will not ALWAYS limit to this amount, the exact count will be determined on the COUNT which is 1000</param>
         /// <returns></returns>
-        IList<string> SelectListOfKeysLike(string keyMatch, int maxResultsSoftLimit = 1000);
+        IList<string> SelectListScan(string keyMatch, int maxResultsSoftLimit = 1000);
+
+        /// <summary>
+        /// KEYS
+        /// 
+        ///     Returns all keys matching pattern; the KEYS or SCAN commands will be used based
+        ///     on the server capabilities; note: to resume an iteration via cursor, cast the
+        ///     original enumerable or enumerator to IScanningCursor.
+        ///     
+        /// KEYS Remarks:
+        ///     Warning: consider KEYS as a command that should only be used in production environments
+        ///     with extreme care.
+        ///     
+        ///     https://redis.io/commands/keys
+        ///     
+        /// </summary>
+        /// <param name="keyMatch"></param>
+        /// <returns></returns>
+        IList<string> SelectListKeys(string keyMatch);
     }
 }

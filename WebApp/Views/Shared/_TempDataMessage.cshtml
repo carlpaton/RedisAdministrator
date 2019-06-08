@@ -1,0 +1,8 @@
+﻿@if (TempData["message"] != null)
+{
+    var message = (MessageViewModel)TempData["message"];
+    <div class="alert @message.CssClassName" role="alert">
+        <strong>@message.Title</strong>
+        @message.Message
+    </div>
+}

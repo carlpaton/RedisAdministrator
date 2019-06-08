@@ -35,14 +35,7 @@
     </div>
     <div class="form-group row">
         <div class="offset-2 col-sm-10">
-            @if (TempData["seed-index-post-ok"] != null)
-            {
-                var message = (MessageViewModel)TempData["seed-index-post-ok"];
-            <div class="alert @message.CssClassName" role="alert">
-                <strong>@message.Title</strong>
-                @message.Message
-            </div>
-            }
+            <partial name="~/Views/Shared/_TempDataMessage.cshtml" />
         </div>
     </div>
 </form>

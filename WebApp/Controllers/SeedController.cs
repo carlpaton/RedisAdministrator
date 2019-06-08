@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RedisRepository.Interfaces;
 using WebApp.Models;
+using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -36,16 +37,8 @@ namespace WebApp.Controllers
                     _redisRepositoryString.Insert(key, value);
                 }
 
-                // TODO, 
-                // move this into an injectable class, CssClassName can be enums
-                // TempData read in .cshtml must also go to a partial view
-                // https://getbootstrap.com/docs/4.0/components/alerts/
-                TempData["seed-index-post-ok"] = new MessageViewModel()
-                {
-                    CssClassName = "alert-primary",
-                    Message = "Seed has complete.",
-                    Title = "OK"
-                };
+                new SetTempDataMessage()
+                    .Display(TempData, "OK", "Seed has complete.");
             }
 
             return View(viewModel);          

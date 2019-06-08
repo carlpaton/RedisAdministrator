@@ -19,15 +19,20 @@ namespace WebApp.Controllers
             return View();
         }
 
+        public IActionResult StringType()
+        {
+            return View();
+        }
+
         [HttpPost]
-        public IActionResult Index(SeedDummyInfoViewModel viewModel)
+        public IActionResult StringType(SeedStringTypeViewModel viewModel)
         { 
             if (ModelState.IsValid) 
             {
-                for (int i = 1; i <= viewModel.KeyCount; i++)
+                for (int i = 1; i <= viewModel.NumberOfKeys; i++)
                 {
                     var key = $"{i}:{i+1}:seed_string";
-                    var value = DummyObjects.GetListWithNValues(viewModel.ValueCount);
+                    var value = DummyObjects.GetOneValue();
                     _redisRepositoryString.Insert(key, value);
                 }
 

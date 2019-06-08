@@ -1,0 +1,65 @@
+﻿@model SeedStringTypeViewModel
+
+@{
+    ViewData["Title"] = "String Type";
+}
+<h1>@ViewData["Title"]</h1>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Seed" asp-action="Index">Seed Help</a></li>
+        <li class="breadcrumb-item active" aria-current="page">String Type</li>
+    </ol>
+</nav>
+
+<p>
+    This will insert <code>n</code> number of keys with values as serialized instances of <a href="https://github.com/carlpaton/RedisAdministrator/blob/master/Common/DummyData/DummyClass.cs" target="_blank">DummyClass</a> using the <code>set</code> command.
+</p>
+<p>
+    Suggested redis keys are `object-type:id`, for this insert I used `1:2:seed_string` where 1 iterates to the given <code>n</code> and 2 is just 1++.
+</p>
+
+<form asp-action="Index" asp-controller="SeedStringType" method="post">
+    <div class="form-group row">
+        <label asp-for="NumberOfKeys" class="col-sm-2 col-form-label"></label>
+
+        <div class="col-sm-10">
+            <input asp-for="NumberOfKeys" class="form-control" />
+            <span asp-validation-for="NumberOfKeys" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-2 col-sm-10">
+            <input type="submit" value="Insert" class="btn btn-primary" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-2 col-sm-10">
+            @if (TempData["seed-index-post-ok"] != null)
+            {
+                var message = (MessageViewModel)TempData["seed-index-post-ok"];
+            <div class="alert @message.CssClassName" role="alert">
+                <strong>@message.Title</strong>
+                @message.Message
+            </div>
+            }
+        </div>
+    </div>
+</form>
+
+<h2>Example</h2>
+
+<pre>
+    <code>
+        &gt; set 1:2:seed_string {"Id":1,"SomeGuid":"291170d2-23c7-4d8c-b327-c3a885533787","DateTime":"2019-06-08T22:24:21.0590419+12:00"}
+        OK
+        &gt; get 1:2:seed_string
+        {"Id":1,"SomeGuid":"291170d2-23c7-4d8c-b327-c3a885533787","DateTime":"2019-06-08T22:24:21.0590419+12:00"}
+    </code>
+</pre>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://redis.io/commands/set" target="_blank">Redis SET</a></li>
+</ul>

@@ -1,7 +1,5 @@
-﻿@model SeedDummyInfoViewModel
-
-@{
-    ViewData["Title"] = "Seed Data";
+﻿@{
+    ViewData["Title"] = "Seed Help";
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -10,59 +8,23 @@
     You can quickly spin up a Redis Server using its <a href="https://hub.docker.com/_/redis" target="_blank">docker image</a>.
 </p>
 
-<h3>String Data Type</h3>
-
 <p>
-    This will insert <code>n</code> number of `String` with <code>y</code> number of values, the values here are serialized instances of <a href="https://github.com/carlpaton/RedisAdministrator/blob/master/Common/DummyData/DummyClass.cs" target="_blank">DummyClass</a>.
+    Try to stick with a schema. For instance <code>object-type:id</code> is a good idea, as in "user:1000". Dots or dashes are often used for multi-word fields, as in <code>comment:1234:reply.to</code> or <code>comment:1234:reply-to</code>.
 </p>
 <p>
-    Suggested redis keys are `object-type:id`, for this insert it will be `1:2:seed_string` where 1 iterates to the given <code>n</code> number of `String`.
+    Dont use <code>*</code> in your schema as this is used in wild card searchs for the <a href="https://redis.io/commands/scan" target="_blank">SCAN command</a>.
 </p>
 
-<pre><code>&gt; set mykey somevalue
-OK
-&gt; get mykey
-"somevalue"
-</code></pre>
+<h2>Seed Inserts</h2>
 
-@using (Html.BeginForm("Index", "Seed", FormMethod.Post))
-{
-    <div class="form-group row">
-        @Html.LabelFor(model => model.KeyCount, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
-        <div class="col-sm-10">
-            @Html.EditorFor(model => model.KeyCount, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(Model => Model.KeyCount, null, new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group row">
-        @Html.LabelFor(model => model.ValueCount, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
-        <div class="col-sm-10">
-            @Html.EditorFor(model => model.ValueCount, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(Model => Model.ValueCount, null, new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="offset-2 col-sm-10">
-            <input type="submit" value="Insert" class="btn btn-primary" />
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="offset-2 col-sm-10">
-            @if (TempData["seed-index-post-ok"] != null)
-            {
-                var message = (MessageViewModel)TempData["seed-index-post-ok"];
-                <div class="alert @message.CssClassName" role="alert">
-                    <strong>@message.Title</strong>
-                    @message.Message
-                </div>
-            }
-        </div>
-    </div>
-}
+<ul>
+    <li><a asp-action="StringType">String Type</a></li>
+</ul>
 
-<h1>References</h1>
+<h2>References</h2>
 
 <ul>
     <li><a href="https://redis.io/topics/data-types-intro" target="_blank">Redis keys</a></li>
     <li><a href="https://redis.io/topics/data-types" target="_blank">Data types</a></li>
+    <li><a href="https://redis.io/commands/scan" target="_blank">SCAN command</a></li>
 </ul>

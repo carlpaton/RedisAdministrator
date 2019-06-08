@@ -38,6 +38,11 @@ namespace RedisRepository
             return _db.KeyExists(key);
         }
 
+        public RedisType GetType(string key)
+        {
+            return _db.KeyType(key);
+        }
+
         public string Info(InfoEnum.Info infoParameter = InfoEnum.Info.All)
         {
             if (infoParameter.Equals(InfoEnum.Info.All))

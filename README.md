@@ -95,6 +95,11 @@ SCAN; https://redis.io/commands/scan
 Warning: consider KEYS as a command that should only be used in production environments with extreme care.
 StackExchange.Redis.Keys; https://redis.io/commands/keys
 
+> GetType
+
+Returns the Redis database type for the given key.
+https://redis.io/commands/type
+
 #### String Type 
 
 These live in `RedisRepositoryString`

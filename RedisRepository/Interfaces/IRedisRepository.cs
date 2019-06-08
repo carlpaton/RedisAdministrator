@@ -1,4 +1,5 @@
 ﻿using RedisRepository.enums;
+using StackExchange.Redis;
 using System.Collections.Generic;
 
 namespace RedisRepository.Interfaces
@@ -94,5 +95,16 @@ namespace RedisRepository.Interfaces
         /// <param name="keyMatch"></param>
         /// <returns></returns>
         IList<string> SelectListKeys(string keyMatch);
+
+        /// <summary>
+        /// TYPE
+        /// 
+        ///     Returns the Redis database type for the given key.
+        /// 
+        ///     https://redis.io/commands/type
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        RedisType GetType(string key);
     }
 }

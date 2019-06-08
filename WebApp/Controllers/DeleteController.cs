@@ -27,10 +27,10 @@ namespace WebApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _redisRepository.Delete(viewModel.IdToDelete);
+                    _redisRepository.Delete(viewModel.KeyToDelete);
 
                     new SetTempDataMessage()
-                        .Display(TempData, "OK", $"The id {viewModel.IdToDelete} has been removed.");
+                        .Display(TempData, "OK", $"The id {viewModel.KeyToDelete} has been removed.");
                 }
             }
             catch (Exception ex)

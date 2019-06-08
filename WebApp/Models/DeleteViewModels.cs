@@ -1,7 +1,11 @@
-﻿namespace WebApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebApp.Models
 {
     public class DeleteViewModel
     {
-        public string IdToDelete { get; set; }
+        [Required]
+        [Display(Name = "Key to delete")]
+        public string KeyToDelete { get; set; }
     }
 }

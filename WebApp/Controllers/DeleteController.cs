@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RedisRepository.Interfaces;
 using System;
+using WebApp.Models;
 using WebApp.Services;
 
 namespace WebApp.Controllers
 {
-    public class ClearController : Controller
+    public class DeleteController : Controller
     {
         private readonly IRedisRepository _redisRepository;
 
-        public ClearController(IRedisRepository redisRepository)
+        public DeleteController(IRedisRepository redisRepository)
         {
             _redisRepository = redisRepository;
         }
@@ -20,16 +21,16 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Clear()
+        public IActionResult Index(DeleteViewModel viewModel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _redisRepository.Clear();
+                    _redisRepository.Delete(viewModel.IdToDelete);
 
                     new SetTempDataMessage()
-                        .Display(TempData, "OK", "Data cleared.");
+                        .Display(TempData, "OK", $"The id {viewModel.IdToDelete} has been removed.");
                 }
             }
             catch (Exception ex)
@@ -38,7 +39,7 @@ namespace WebApp.Controllers
                     .Display(TempData, "Error", ex.Message, SetTempDataMessage.CssClassNameEnum.alert_danger);
             }
 
-            return View("Index");
+            return View(viewModel);
         }
     }
 }

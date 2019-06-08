@@ -18,7 +18,7 @@ Application to help admin a redis instance, while developing I used redis-comman
 3. Spin up `redis administrator` and pass the environment setting to tell it which redis server to connect to. If not set it will default to `localhost:6379,allowAdmin=true` 
 
    ```
-   docker run --name red-admin -d -p 8080:80 --network redis-bridge-network --env REDIS_CONNECTION=red-srv  carlpaton/redis-administrator:latest
+   docker run --name red-admin -d -p 8080:80 --network redis-bridge-network --env REDIS_CONNECTION=red-srv,allowAdmin=true  carlpaton/redis-administrator:latest
    ```
 
 4. Access from http://127.0.0.1:8080

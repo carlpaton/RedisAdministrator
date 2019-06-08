@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RedisRepository.Interfaces;
+using System;
 using WebApp.Services;
 
 namespace WebApp.Controllers
@@ -21,10 +22,18 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult Clear()
         {
-            _redisRepository.Clear();
+            try
+            {
+                _redisRepository.Clear();
 
-            new SetTempDataMessage()
-                .Display(TempData, "OK", "Data cleared.");
+                new SetTempDataMessage()
+                    .Display(TempData, "OK", "Data cleared.");
+            }
+            catch (Exception ex)
+            {
+                new SetTempDataMessage()
+                    .Display(TempData, "Error", ex.Message, SetTempDataMessage.CssClassNameEnum.alert_danger);
+            }
 
             return View("Index");
         }

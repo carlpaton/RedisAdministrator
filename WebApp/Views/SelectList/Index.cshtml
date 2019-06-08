@@ -1,0 +1,65 @@
+﻿@model SelectListViewModel
+
+@{
+    ViewData["Title"] = "Search";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    This will search on the given string using the <code>SCAN</code> command which is none blocking unlike the <code>KEYS</code>.
+</p>
+<p>
+    You can search on an exact match, example: `1:2:seed_string` or on partial, example: `1:*`. For performance the max reults are limited to 1000.
+</p>
+
+<form asp-action="Index" asp-controller="SelectList" method="post">
+    <div class="form-group row">
+        <label asp-for="SearchOnKey" class="col-sm-2 col-form-label"></label>
+
+        <div class="col-sm-10">
+            <input asp-for="SearchOnKey" class="form-control" />
+            <span asp-validation-for="SearchOnKey" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-2 col-sm-10">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-2 col-sm-10">
+            <partial name="~/Views/Shared/_TempDataMessage.cshtml" />
+        </div>
+    </div>
+</form>
+
+@if (Model != null && Model.Result != null)
+{
+    <h2>Search Results</h2>
+
+    <span>Found <strong>@Html.Raw(Model.ResultCount)</strong> key(s):</span>     
+    <p>
+        <span style="white-space: pre-line">@Html.Raw(Model.Result)</span>
+    </p>
+}
+
+<h2>Example</h2>
+
+<pre>
+<code>
+        &gt; sadd myset 1 2 3 foo foobar feelsgood
+        (integer) 6
+        &gt; sscan myset 0 match f*
+        1) "0"
+        2) 1) "foo"
+           2) "feelsgood"
+           3) "foobar"
+    </code>
+</pre>
+
+<h2>References</h2>
+
+<ul>
+    <li><a href="https://redis.io/commands/scan" target="_blank">Redis SCAN</a></li>
+    <li><a href="https://redis.io/commands/keys" target="_blank">Redis KEYS</a></li>
+</ul>

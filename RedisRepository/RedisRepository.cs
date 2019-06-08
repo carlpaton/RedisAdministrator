@@ -46,18 +46,21 @@ namespace RedisRepository
            return (string)_db.Execute("INFO", new object[] { infoParameter.ToString() });
         }
 
-        public IList<string> SelectListOfKeysLike(string keyMatch, int count = 1000)
+        public IList<string> SelectListOfKeysLike(string keyMatch, int maxResultsSoftLimit = 1000)
         {
             var list = new List<string>();
 
             int nextCursor = 0;
             do
             {
-                var redisResult = _db.Execute("SCAN", new object[] { nextCursor.ToString(), "MATCH", keyMatch, "COUNT", count });
+                var redisResult = _db.Execute("SCAN", new object[] { nextCursor.ToString(), "MATCH", keyMatch, "COUNT", 1000 });
                 var innerResult = (RedisResult[])redisResult;
                 nextCursor = int.Parse((string)innerResult[0]);
                 var resultLines = ((string[])innerResult[1]).ToList();
                 list.AddRange(resultLines);
+
+                if (list.Count >= maxResultsSoftLimit)
+                    break;
             }
             while (nextCursor != 0);
 

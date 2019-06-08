@@ -4,16 +4,16 @@
     {
         public enum Info 
         { 
-            All, 
-            Server,
-            Clients,
-            Memory,
-            Persistence,
-            Stats,
-            Replication,
+            All,
             CPU,
             Cluster,
-            Keyspace
+            Clients,
+            Keyspace,
+            Memory,
+            Persistence,
+            Replication,
+            Server,
+            Stats
         }
     }
 }

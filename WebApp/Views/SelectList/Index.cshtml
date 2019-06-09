@@ -37,7 +37,7 @@
 {
     <h2>Search Results</h2>
 
-    <span>Found <strong>@Html.Raw(Model.ResultCount)</strong> key(s):</span>     
+    <span>Found <strong>@Html.Raw(Model.ResultCount)</strong> key(s):</span>
     <p>
         <span style="white-space: pre-line">@Html.Raw(Model.Result)</span>
     </p>
@@ -63,3 +63,56 @@
     <li><a href="https://redis.io/commands/scan" target="_blank">Redis SCAN</a></li>
     <li><a href="https://redis.io/commands/keys" target="_blank">Redis KEYS</a></li>
 </ul>
+
+<div id="dialog" style="z-index: 1050!important;" title="Zoom On Key">
+    <div id="divResults">
+        <partial name="~/Views/SelectList/_ZoomOnKey.cshtml" model="new WebApp.Models.ZoomViewModels()" />
+    </div>
+</div>
+
+<style type="text/css">
+    .keyResult:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        color: #007bff;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#dialog").dialog({
+            autoOpen: false,
+            height: 400,
+            width: 600,
+            draggable: false,
+            resizable: false,
+            dialogClass: 'dialog',
+            open: function () {
+                $(this).scrollTop(0);
+            },
+            buttons: [
+                {
+                    text: "DELETE",
+                    click: function () {
+                        alert("Not yet implemented");
+                        $("#dialog").dialog("close");
+                    }
+                },
+                {
+                    text: "CLOSE",
+                    click: function () {
+                        $("#dialog").dialog("close");
+                    }
+                }
+            ]
+        });
+        $(".keyResult").click(function () {
+            KeyClick($(this).text());
+        });
+    });
+    function KeyClick(key)
+    {
+        $('#divResults').load("@Url.Action("ZoomOnKey")" + "?key=" + key);
+        $("#dialog").dialog("open");
+    }
+</script>

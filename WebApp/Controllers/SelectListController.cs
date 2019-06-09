@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RedisRepository.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using WebApp.Models;
 
@@ -25,15 +26,33 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var resultList = _redisRepository
+                var keyList = _redisRepository
                     .SelectListScan(viewModel.SearchOnKey, 1000)
                     .ToList();
 
-                viewModel.Result = string.Join(Environment.NewLine, resultList);
-                viewModel.ResultCount = resultList.Count();
+                var newList = new List<string>();
+                foreach (var key in keyList)
+                {
+                    newList.Add("<span class='keyResult'>"+key+"</span>");
+                }
+
+                viewModel.Result = string.Join(Environment.NewLine, newList);
+                viewModel.ResultCount = keyList.Count();
             }
 
             return View(viewModel);
+        }
+
+        public ActionResult ZoomOnKey(string key)
+        {
+            var keyType = _redisRepository.GetType(key).ToString();
+
+            var viewModel = new ZoomViewModels()
+            {
+                Key = key,
+                Type = keyType
+            };
+            return PartialView("_ZoomOnKey", viewModel);
         }
     }
 }

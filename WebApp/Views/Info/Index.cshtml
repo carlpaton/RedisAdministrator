@@ -36,7 +36,7 @@
 
 @section scripts {
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(function () {
             $("#Filter").removeAttr("multiple"); //TODO: Fix this hack! `multiple` was added by the framework as the items `Model.Filter` are an Ienumerable
             $("#Filter").change(function () {
                 $("#SelectedFilter").val($(this).val());

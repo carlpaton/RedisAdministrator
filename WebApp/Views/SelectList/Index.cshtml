@@ -3,6 +3,15 @@
 @{
     ViewData["Title"] = "Search";
 }
+
+<style type="text/css">
+    .keyResult:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        color: #007bff;
+    }
+</style>
+
 <h1>@ViewData["Title"]</h1>
 
 <p>
@@ -57,6 +66,8 @@
     </code>
 </pre>
 
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
 <h2>References</h2>
 
 <ul>
@@ -64,59 +75,31 @@
     <li><a href="https://redis.io/commands/keys" target="_blank">Redis KEYS</a></li>
 </ul>
 
-<div id="dialog" style="z-index: 1050!important;" title="Zoom On Key">
-    <div id="divResults">
-        <partial name="~/Views/SelectList/_ZoomOnKey.cshtml" model="new WebApp.Models.ZoomViewModels()" />
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Zoom on key</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="divResults">
+                    <partial name="~/Views/SelectList/_ZoomOnKey.cshtml" model="new WebApp.Models.ZoomViewModels()" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
 
-<style type="text/css">
-    .keyResult:hover {
-        cursor: pointer;
-        text-decoration: underline;
-        color: #007bff;
-    }
-</style>
-
 @section scripts {
     <script type="text/javascript">
-            $(document).ready(function () {
-                $("#dialog").dialog({
-                    autoOpen: false,
-                    height: 400,
-                    width: 600,
-                    draggable: false,
-                    resizable: false,
-                    dialogClass: 'dialog',
-                    open: function () {
-                        $(this).scrollTop(0);
-                    },
-                    buttons: [
-                        {
-                            class: "btn btn-danger",
-                            text: "DELETE",
-                            click: function () {
-                                alert("Not yet implemented");
-                                $("#dialog").dialog("close");
-                            }
-                        },
-                        {
-                            class: "btn btn-secondary",
-                            text: "CLOSE",
-                            click: function () {
-                                $("#dialog").dialog("close");
-                            }
-                        }
-                    ]
-                });
-                $(".keyResult").click(function () {
-                    KeyClick($(this).text());
-                });
+        $(function () {
+            $(".keyResult").on('click', function () {
+                $('#divResults').load("@Url.Action("ZoomOnKey")" + "?key=" + $(this).data('key'));
             });
-        function KeyClick(key)
-        {
-            $('#divResults').load("@Url.Action("ZoomOnKey")" + "?key=" + key);
-            $("#dialog").dialog("open");
-        }
+        });
     </script>
 }

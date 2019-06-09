@@ -34,8 +34,8 @@
     <li><a href="https://redis.io/commands/INFO" target="_blank">INFO command</a></li>
 </ul>
 
-<script type="text/javascript">
-    window.onload = function () {
+@section scripts {
+    <script type="text/javascript">
         $(document).ready(function () {
             $("#Filter").removeAttr("multiple"); //TODO: Fix this hack! `multiple` was added by the framework as the items `Model.Filter` are an Ienumerable
             $("#Filter").change(function () {
@@ -43,5 +43,5 @@
                 this.form.submit();
             });
         });
-    }
-</script>
+    </script>
+}

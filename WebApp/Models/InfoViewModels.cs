@@ -8,5 +8,6 @@ namespace WebApp.Models
         public string Info { get; set; }
         public string SelectedFilter { get; set; }
         public List<SelectListItem> Filter { get; set; }
+        public string Connection { get; set; }
     }
 }

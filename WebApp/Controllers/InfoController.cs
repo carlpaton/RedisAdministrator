@@ -5,16 +5,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using RedisRepository.enums;
 using RedisRepository.Interfaces;
 using WebApp.Models;
+using WebApp.Services;
 
 namespace WebApp.Controllers
 {
     public class InfoController : Controller
     {
         private readonly IRedisRepository _redisRepository;
+        private readonly IAppSettings _appSettings;
 
-        public InfoController(IRedisRepository redisRepository)
+        public InfoController(IRedisRepository redisRepository, IAppSettings appSettings)
         {
             _redisRepository = redisRepository;
+            _appSettings = appSettings;
         }
 
         public IActionResult Index()
@@ -22,7 +25,8 @@ namespace WebApp.Controllers
             var viewModel = new InfoViewModel()
             {
                 Info = _redisRepository.Info(InfoEnum.Info.All),
-                Filter = SetDropDownList()
+                Filter = SetDropDownList(),
+                Connection = _appSettings.Connection
             };
             return View(viewModel);
         }
@@ -34,6 +38,7 @@ namespace WebApp.Controllers
 
             viewModel.Info = _redisRepository.Info(infoParameter);
             viewModel.Filter = SetDropDownList();
+            viewModel.Connection = _appSettings.Connection;
             return View(viewModel);          
         }
 

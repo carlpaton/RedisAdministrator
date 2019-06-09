@@ -33,12 +33,6 @@
                             <a class="nav-link text-dark" asp-controller="Info" asp-action="Index">Info</a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link text-dark" asp-controller="Clear" asp-action="Index">Clear</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link text-dark" asp-controller="Delete" asp-action="Index">Delete</a>
-                        </li>
-                        <li class="nav-item active">
                             <a class="nav-link text-dark" asp-controller="SelectList" asp-action="Index">Search</a>
                         </li>
                         <li class="nav-item dropdown">
@@ -47,6 +41,13 @@
                                 <a class="dropdown-item" asp-controller="Seed" asp-action="Index">Seed Help</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" asp-controller="Seed" asp-action="StringType">String Type</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" id="dropdown02" asp-area="" asp-controller="Seed" data-toggle="dropdown">Admin Tools</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown02">
+                                <a class="dropdown-item" asp-controller="Clear" asp-action="Index">Clear</a>
+                                <a class="dropdown-item" asp-controller="Delete" asp-action="Index">Delete</a>
                             </div>
                         </li>
                     </ul>

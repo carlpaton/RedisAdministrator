@@ -6,7 +6,7 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>
-    <code>WARNING</code> this will clear ALL RECORDS.
+    <code>WARNING</code> this will clear ALL RECORDS using the <code>flushall</code> command.
 </p>
 
 <form asp-action="Clear" asp-controller="Clear" method="post">
@@ -15,7 +15,7 @@
             Clear all records
         </div>
         <div class="col-sm-10">
-            <input type="submit" class="btn btn-primary" value="Clear" onclick="return confirm('WARNING! this will clear ALL RECORDS!\nAre you sure?')" />
+            <input type="submit" class="btn btn-danger" value="Clear" onclick="return confirm('WARNING! this will clear ALL RECORDS!\nAre you sure?')" />
         </div>
     </div>
     <div class="form-group row">

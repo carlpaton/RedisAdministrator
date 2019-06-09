@@ -79,37 +79,39 @@
 </style>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#dialog").dialog({
-            autoOpen: false,
-            height: 400,
-            width: 600,
-            draggable: false,
-            resizable: false,
-            dialogClass: 'dialog',
-            open: function () {
-                $(this).scrollTop(0);
-            },
-            buttons: [
-                {
-                    text: "DELETE",
-                    click: function () {
-                        alert("Not yet implemented");
-                        $("#dialog").dialog("close");
-                    }
+    window.onload = function () {
+        $(document).ready(function () {
+            $("#dialog").dialog({
+                autoOpen: false,
+                height: 400,
+                width: 600,
+                draggable: false,
+                resizable: false,
+                dialogClass: 'dialog',
+                open: function () {
+                    $(this).scrollTop(0);
                 },
-                {
-                    text: "CLOSE",
-                    click: function () {
-                        $("#dialog").dialog("close");
+                buttons: [
+                    {
+                        text: "DELETE",
+                        click: function () {
+                            alert("Not yet implemented");
+                            $("#dialog").dialog("close");
+                        }
+                    },
+                    {
+                        text: "CLOSE",
+                        click: function () {
+                            $("#dialog").dialog("close");
+                        }
                     }
-                }
-            ]
+                ]
+            });
+            $(".keyResult").click(function () {
+                KeyClick($(this).text());
+            });
         });
-        $(".keyResult").click(function () {
-            KeyClick($(this).text());
-        });
-    });
+    }
     function KeyClick(key)
     {
         $('#divResults').load("@Url.Action("ZoomOnKey")" + "?key=" + key);

@@ -33,7 +33,7 @@ namespace WebApp.Controllers
                 var newList = new List<string>();
                 foreach (var key in keyList)
                 {
-                    newList.Add("<span class='keyResult' data-toggle='modal' data-target='#myModal' data-key='"+key+"'>"+key+"</span>");
+                    newList.Add("<div class='keyResult' data-toggle='modal' data-target='#myModal' data-key='"+key+"'>"+key+"</div>");
                 }
 
                 viewModel.Result = string.Join(Environment.NewLine, newList);

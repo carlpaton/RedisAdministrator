@@ -51,9 +51,9 @@
     <h2>Search Results</h2>
 
     <span>Found <strong>@Html.Raw(Model.ResultCount)</strong> key(s):</span>
-    <p class="keyResults">
-        <span style="white-space: pre-line">@Html.Raw(Model.Result)</span>
-    </p>
+    <div class="keyResults my-3">
+        @Html.Raw(Model.Result)
+    </div>
 }
 
 <h2>Example</h2>

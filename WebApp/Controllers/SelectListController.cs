@@ -11,11 +11,13 @@ namespace WebApp.Controllers
     {
         private readonly IRedisRepository _redisRepository;
         private readonly IRedisRepositoryString _redisRepositoryString;
+        private readonly IRedisRepositorySortedSet _redisRepositorySortedSet;
 
-        public SelectListController(IRedisRepository redisRepository, IRedisRepositoryString redisRepositoryString)
+        public SelectListController(IRedisRepository redisRepository, IRedisRepositoryString redisRepositoryString, IRedisRepositorySortedSet redisRepositorySortedSet)
         {
             _redisRepository = redisRepository;
             _redisRepositoryString = redisRepositoryString;
+            _redisRepositorySortedSet = redisRepositorySortedSet;
         }
 
         public IActionResult Index()
@@ -61,9 +63,10 @@ namespace WebApp.Controllers
         private string ReadValue(string key, string keyType)
         {
             if (keyType == "String")
-            {
                 return _redisRepositoryString.Select(key);
-            }
+
+            if (keyType == "SortedSet")
+                return string.Join(" ", _redisRepositorySortedSet.SelectList(key));
 
             return "";
         }

@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Help";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    General things I found helpful when building this tool and to give a general understand on Redis.
+</p>
+
+<h2>Redis CLI in Docker</h2>
+
+<p>
+    This will spin up an ubuntu container and install redis on it, you can then run CLI commands.
+</p>
+
+<pre>
+    docker run --name red-ubuntu --network redis-bridge-network -i -t ubuntu
+    apt-get update
+    apt-get install iputils-ping
+    ping google.com
+    ping red-srv
+    apt-get install redis-tools
+</pre>
+
+<h2>CLI Commands</h2>
+
+<pre>
+    redis-cli -h red-srv --scan --pattern *:*:seed_sorted_set
+    redis-cli -h red-srv --scan --pattern *:*:seed_sorted_set | xargs redis-cli -h red-srv del
+</pre>
+
+<h2>References</h2>
+
+<ul>
+    <li><a href="https://redis.io/topics/rediscli" target="_blank">redis-cli, the Redis command line interface</a></li>
+</ul>

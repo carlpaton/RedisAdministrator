@@ -14,6 +14,10 @@
         max-height: 600px;
         overflow: auto;
     }
+    .modal-dialog {
+        margin: 1.75rem auto;
+        max-width: 50vw;
+    }
 </style>
 
 <h1>@ViewData["Title"]</h1>
@@ -22,7 +26,10 @@
     This will search on the given string using the <code>SCAN</code> command which is none blocking unlike the <code>KEYS</code>.
 </p>
 <p>
-    You can search on an exact match, example: `1:2:seed_string` or on partial, example: `1:*`. For performance the max results are soft limited to 1000 (dependant on the database cursor value)
+    You can search on an exact match, example: `1:2:seed_string` or on partial, example: `1:*`. 
+</p>
+<p>
+    If you have no idea just search with <code>*</code> ... for performance the max results are soft limited to 1000. (dependant on the database cursor value)
 </p>
 
 <form asp-action="Index" asp-controller="SelectList" method="post">

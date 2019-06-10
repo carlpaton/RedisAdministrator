@@ -24,13 +24,30 @@
 
 <h2>CLI Commands</h2>
 
+<p>
+    Redis command line interface.
+</p>
+
+<h3>SCAN, DEL</h3>
+
 <pre>
     redis-cli -h red-srv --scan --pattern *:*:seed_sorted_set
     redis-cli -h red-srv --scan --pattern *:*:seed_sorted_set | xargs redis-cli -h red-srv del
+</pre>
+
+<h3>ZADD, ZSCORE</h3>
+
+<pre>
+    redis-cli -h red-srv ZADD myzset 1 "one"
+    redis-cli -h red-srv ZSCORE myzset "one"
 </pre>
 
 <h2>References</h2>
 
 <ul>
     <li><a href="https://redis.io/topics/rediscli" target="_blank">redis-cli, the Redis command line interface</a></li>
+    <li><a href="https://redis.io/commands/del" target="_blank">DEL</a></li>
+    <li><a href="https://redis.io/commands/scan" target="_blank">SCAN</a></li>
+    <li><a href="https://redis.io/commands/zadd" target="_blank">ZADD</a></li>
+    <li><a href="https://redis.io/commands/zscore" target="_blank">ZSCORE</a></li>
 </ul>

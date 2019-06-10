@@ -150,7 +150,7 @@ These are specified in the docker image build:
 
 `RUN dotnet test "./UnitTest/UnitTest.csproj" -c Release --no-build --no-restore`
 
-* <https://github.com/carlpaton/RedisAdministrator/blob/master/Dockerfile>
+* https://github.com/carlpaton/RedisAdministrator/blob/master/Dockerfile
 
 # References
 

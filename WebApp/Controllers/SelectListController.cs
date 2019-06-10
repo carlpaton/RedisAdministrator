@@ -10,10 +10,12 @@ namespace WebApp.Controllers
     public class SelectListController : Controller
     {
         private readonly IRedisRepository _redisRepository;
+        private readonly IRedisRepositoryString _redisRepositoryString;
 
-        public SelectListController(IRedisRepository redisRepository)
+        public SelectListController(IRedisRepository redisRepository, IRedisRepositoryString redisRepositoryString)
         {
             _redisRepository = redisRepository;
+            _redisRepositoryString = redisRepositoryString;
         }
 
         public IActionResult Index()
@@ -50,9 +52,20 @@ namespace WebApp.Controllers
             var viewModel = new ZoomViewModels()
             {
                 Key = key,
-                Type = keyType
+                Type = keyType,
+                Value = ReadValue(key, keyType)
             };
             return PartialView("_ZoomOnKey", viewModel);
+        }
+
+        private string ReadValue(string key, string keyType)
+        {
+            if (keyType == "String")
+            {
+                return _redisRepositoryString.Select(key);
+            }
+
+            return "";
         }
     }
 }

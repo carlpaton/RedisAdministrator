@@ -23,10 +23,10 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>
-    This will search on the given string using the <code>SCAN</code> command which is none blocking unlike the <code>KEYS</code>.
+    This will search on the given string using the <code>SCAN</code> command which is none blocking unlike the <code>KEYS</code> command.
 </p>
 <p>
-    You can search on an exact match, example: `1:2:seed_string` or on partial, example: `1:*`. 
+    You can search on an exact match, example: <code>1:2:seed_string</code> or on partial, example: <code>1:*</code>
 </p>
 <p>
     If you have no idea just search with <code>*</code> ... for performance the max results are soft limited to 1000. (dependant on the database cursor value)

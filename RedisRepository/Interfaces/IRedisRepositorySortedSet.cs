@@ -41,5 +41,17 @@ namespace RedisRepository.Interfaces
         /// <param name="value"></param>
         /// <returns></returns>
         bool Insert(string key, string value);
+
+        /// <summary>
+        /// StackExchange.Redis.SortedSetScore
+        /// 
+        ///     Returns the score of member in the sorted set at key. If member does not exist in the sorted set, or key does not exist, nil is returned.
+        ///     https://redis.io/commands/zscore
+        ///     
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        double? SelectScore(string key, string member);
     }
 }

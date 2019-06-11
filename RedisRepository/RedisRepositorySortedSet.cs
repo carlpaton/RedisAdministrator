@@ -50,5 +50,10 @@ namespace RedisRepository
 
             return response;
         }
+
+        public double? SelectScore(string key, string member)
+        {
+            return _db.SortedSetScore(key, member);
+        }
     }
 }

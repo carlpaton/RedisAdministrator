@@ -3,6 +3,7 @@ using RedisRepository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using WebApp.Models;
 
 namespace WebApp.Controllers
@@ -47,6 +48,8 @@ namespace WebApp.Controllers
             return View(viewModel);
         }
 
+        // TODO ~ move these private methods into a service
+
         public ActionResult ZoomOnKey(string key)
         {
             var keyType = _redisRepository.GetType(key).ToString();
@@ -55,20 +58,44 @@ namespace WebApp.Controllers
             {
                 Key = key,
                 Type = keyType,
-                Value = ReadValue(key, keyType)
+                ValueData = ReadValue(key, keyType)
             };
             return PartialView("_ZoomOnKey", viewModel);
         }
 
-        private string ReadValue(string key, string keyType)
+        private ValueDataViewModel ReadValue(string key, string keyType)
         {
             if (keyType == "String")
-                return _redisRepositoryString.Select(key);
+            { 
+                return new StringTypeViewModel()
+                {
+                    Value = _redisRepositoryString.Select(key)
+                };
+            }
 
             if (keyType == "SortedSet")
-                return string.Join(" ", _redisRepositorySortedSet.SelectList(key));
+            {
+                var valueData = new SortedSetWithScoreViewModel()
+                {
+                    Data = new List<List<string>>()
+                };
 
-            return "";
+                var counter = 0;
+                foreach (var member in _redisRepositorySortedSet.SelectListRecordWithScore(key))
+                {
+                    valueData.Data.Add(new List<string>(){
+                        counter.ToString(),
+                        member.Item1.ToString(),
+                        member.Item2
+                        });
+
+
+                    counter++;
+                }
+                return valueData;
+            }
+
+            return new ValueDataViewModel();
         }
     }
 }

@@ -1,5 +1,14 @@
 # Redis Administrator
-Application to help admin a redis instance, while developing I used redis-commander which is an AWESOME piece of software!
+Open source C# Web Application to help Admin and understand a [Redis](https://redis.io/) database.
+
+## Credit
+
+* Developers
+  * [Carl Paton](https://www.linkedin.com/in/carl-paton/)
+  * [Tomoyuki Tsuda](https://github.com/hoehoetester)
+
+While trying to understand how Redis works I used the [Redis CLI](https://redis.io/topics/rediscli) and [redis-commander](https://www.npmjs.com/package/redis-commander) which is an AWESOME piece of software!
+
 
 ## Example Docker Image Usage
 
@@ -21,7 +30,7 @@ Application to help admin a redis instance, while developing I used redis-comman
    docker run --name red-admin -d -p 8080:80 --network redis-bridge-network --env REDIS_CONNECTION=red-srv,allowAdmin=true  carlpaton/redis-administrator:latest
    ```
 
-4. Access from http://127.0.0.1:8080
+4. Access from http://localhost:8080
 
 5. Cleanup
 

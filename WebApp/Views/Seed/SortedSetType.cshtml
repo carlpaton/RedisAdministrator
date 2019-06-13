@@ -13,7 +13,8 @@
 </nav>
 
 <p>
-    This will insert <code>n</code> number of keys with values as serialized instances of <a href="https://github.com/carlpaton/RedisAdministrator/blob/master/Common/DummyData/DummyClass.cs" target="_blank">DummyClass</a> using the <code>set</code> command. If the key exists it is replaced regardless of its type.
+    This will insert <code>n</code> number of keys with values as serialized instances of <a href="https://github.com/carlpaton/RedisAdministrator/blob/master/Common/DummyData/DummyClass.cs" target="_blank">DummyClass</a> using the <code>set</code> command.
+    The <code>score</code> for each member is auto calculated as seconds in time since <code>1 Jan 1970</code>. <i>Note: </i>If the key exists it is replaced regardless of its type.
 </p>
 <p>
     Suggested redis keys are `object-type:id`, for this insert I used `1:2:seed_sorted_set` where 1 iterates to the given <code>n</code> and 2 is just 1++.

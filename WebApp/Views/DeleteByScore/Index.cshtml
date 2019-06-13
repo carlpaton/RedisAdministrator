@@ -1,0 +1,87 @@
+﻿@model DeleteByScoreViewModel
+
+@{
+    ViewData["Title"] = "Delete By Score";
+}
+
+<style type="text/css">
+    .text-sm {
+        font-size: 0.8em;
+    }
+</style>
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    You can search on an exact match, example: <code>1:2:seed_sorted_set</code> or on partial, example: <code>1:*</code>
+</p>
+
+<form asp-action="Index" asp-controller="DeleteByScore" method="post">
+    <div class="form-group row">
+        <label asp-for="SearchOnKey" class="col-sm-2 col-form-label"></label>
+
+        <div class="col-sm-10">
+            <input asp-for="SearchOnKey" class="form-control" />
+            <span asp-validation-for="SearchOnKey" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="ScoreField" class="col-sm-2 col-form-label"></label>
+
+        <div class="col-sm-4">
+            <input type="radio" asp-for="ScoreField" value="greaterThan" checked /> Greater Than,
+            <input type="radio" asp-for="ScoreField" value="lessThan" /> Less Than
+        </div>
+
+        <label asp-for="ScoreFilter" class="col-sm-2 col-form-label"></label>
+
+        <div class="col-sm-4">
+            <input asp-for="ScoreFilter" class="form-control" />
+            <span asp-validation-for="ScoreFilter" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="MaxResults" class="col-sm-2 col-form-label"></label>
+
+        <div class="col-sm-10">
+            <input asp-for="MaxResults" class="form-control" />
+            <span asp-validation-for="MaxResults" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-2 col-sm-10">
+            <input type="submit" value="Search (Delete logic not built as yet)" class="btn btn-primary" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-2 col-sm-10">
+            <partial name="~/Views/Shared/_TempDataMessage.cshtml" />
+        </div>
+    </div>
+</form>
+
+@if (Model != null && Model.Result != null)
+{
+    <h2>Search Results</h2>
+    <p>
+        Note that one <code>Key</code> can have a sorted set (an array) of values and each value has a score.
+    </p>
+
+    <div>Found <strong>@Html.Raw(Model.ResultCount)</strong> key(s):</div>
+    <br />
+
+    <div class="container text-sm">
+        <div class="row font-weight-bold">
+            <div class="col-sm-4">Key</div>
+            <div class="col-sm-4">Score</div>
+            <div class="col-sm-4">Value</div>
+        </div>
+        @Html.Raw(Model.Result)
+    </div>
+}
+
+<h2>References</h2>
+
+<ul>
+    <li><a href="https://redis.io/commands/del" target="_blank">DEL</a></li>
+</ul>

@@ -54,5 +54,29 @@ namespace RedisRepository.Interfaces
         /// <param name="member"></param>
         /// <returns></returns>
         double? SelectScore(string key, string member);
+
+        /// <summary>
+        /// StackExchange.Redis.SortedSetRemove 
+        /// 
+        ///     Removes the specified members from the sorted set stored at key. Non existing members are ignored.
+        ///     http://redis.io/commands/zrem
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        bool SortedSetRemove(string key, string member);
+
+        /// <summary>
+        /// StackExchange.Redis.SortedSetRemoveRangeByScore
+        /// 
+        ///     Removes all elements in the sorted set stored at key with a score between min and max (inclusive).
+        ///     http://redis.io/commands/zremrangebyscore
+        ///     
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="start"></param>
+        /// <param name="stop"></param>
+        void SortedSetRemoveRangeByScore(string key, double start, double stop);
     }
 }

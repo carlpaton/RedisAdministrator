@@ -51,5 +51,15 @@ namespace RedisRepository
         {
             return _db.SortedSetScore(key, member);
         }
+
+        public void SortedSetRemoveRangeByScore(string key, double start, double stop)
+        {
+            _db.SortedSetRemoveRangeByScore(key, start, stop);
+        }
+
+        public bool SortedSetRemove(string key, string member)
+        {
+            return _db.SortedSetRemove(key, member);
+        }
     }
 }

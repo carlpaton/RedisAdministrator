@@ -8,6 +8,10 @@
     .text-sm {
         font-size: 0.8em;
     }
+    .keyResults {
+        max-height: 600px;
+        overflow: auto;
+    }
 </style>
 
 <h1>@ViewData["Title"]</h1>
@@ -70,7 +74,7 @@
     <div>Found <strong>@Html.Raw(Model.ResultCount)</strong> key(s):</div>
     <br />
 
-    <div class="container text-sm">
+    <div class="keyResults container text-sm">
         <div class="row font-weight-bold">
             <div class="col-sm-4">Key</div>
             <div class="col-sm-4">Score</div>

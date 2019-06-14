@@ -60,7 +60,7 @@ namespace WebApp.Controllers
                 {
                     var key = $"{i}:{i+1}:seed_sorted_set";
                     var value = DummyObjects.GetListWithNValues(viewModel.NumberOfValuesInKey);
-                    _redisRepositorySortedSet.Insert(key, value);
+                    _redisRepositorySortedSet.Insert(key, value, ScoreCalculator.ScoreYear1970());
                 }
 
                 new SetTempDataMessage()

@@ -14,12 +14,8 @@ namespace RedisRepository
             _db = ConnectionMultiplexer.Connect(connection).GetDatabase();
         }
 
-        public bool Insert(string key, string value)
+        public bool Insert(string key, string value, double score)
         {
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime();
-            var span = (DateTime.Now.ToLocalTime() - epoch);
-            var score = span.TotalSeconds;
-
             return _db.SortedSetAdd(key, value, score);
         }
 

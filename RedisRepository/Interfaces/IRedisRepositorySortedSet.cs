@@ -39,8 +39,9 @@ namespace RedisRepository.Interfaces
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
+        /// <param name="score">WebApp.Services.ScoreCalculator</param>
         /// <returns></returns>
-        bool Insert(string key, string value);
+        bool Insert(string key, string value, double score);
 
         /// <summary>
         /// StackExchange.Redis.SortedSetScore

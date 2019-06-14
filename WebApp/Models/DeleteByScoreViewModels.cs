@@ -6,7 +6,7 @@ namespace WebApp.Models
     {
         [Required]
         [Display(Name = "A Score Of")]
-        public int ScoreFilter { get; set; }
+        public double ScoreFilter { get; set; }
 
         [Required]
         [Display(Name = "Search On Key")]

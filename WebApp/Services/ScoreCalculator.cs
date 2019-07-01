@@ -2,33 +2,48 @@
 
 namespace WebApp.Services
 {
-    public static class ScoreCalculator
+    public interface IScoreCalculator 
     {
-        public static double ScoreYear1970()
-        {
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime();
-            var span = (DateTime.Now.ToLocalTime() - epoch);
-            var score = span.TotalSeconds;
+        double ScoreYear1970();
+        double ScoreYearOne();
+        double ScoreByDate(DateTime dateTime);
+        DateTime DateByScore(double score);
+    }
 
-            return score;
+    public class ScoreCalculator : IScoreCalculator
+    {
+        /// <summary>
+        /// This is the default used by this application
+        /// </summary>
+        public DateTime Year1970 = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime();
+
+        /// <summary>
+        /// Included for example only, some old farts were coding at this point in time :D
+        /// </summary>
+        public DateTime YearOne = new DateTime(1, 1, 1, 0, 0, 0, 0).ToLocalTime();
+
+        public double ScoreYear1970()
+        {
+            var span = (DateTime.Now.ToLocalTime() - Year1970);
+            return span.TotalSeconds;
         }
 
-        public static double ScoreYearOne()
+        public double ScoreYearOne()
         {
-            var epoch = new DateTime(1, 1, 1, 0, 0, 0, 0).ToLocalTime();
-            var span = (DateTime.Now.ToLocalTime() - epoch);
-            var score = span.TotalSeconds;
-
-            return score;
+            var span = (DateTime.Now.ToLocalTime() - YearOne);
+            return span.TotalSeconds;
         }
 
-        public static double ScoreByDate(DateTime dateTime)
+        public double ScoreByDate(DateTime dateTime)
         {
-            var epoch = dateTime.ToLocalTime();
-            var span = (DateTime.Now.ToLocalTime() - epoch);
-            var score = span.TotalSeconds;
+            var span = (dateTime.ToLocalTime() - Year1970);
+            return span.TotalSeconds;
+        }
 
-            return score;
+        public DateTime DateByScore(double score)
+        {
+            // assume Year1970
+            return Year1970.AddSeconds(score);
         }
     }
 }

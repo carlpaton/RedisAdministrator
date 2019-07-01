@@ -1,6 +1,7 @@
 ﻿using Common.DummyData;
 using Microsoft.AspNetCore.Mvc;
 using RedisRepository.Interfaces;
+using System;
 using WebApp.Models;
 using WebApp.Services;
 
@@ -10,11 +11,13 @@ namespace WebApp.Controllers
     {
         private readonly IRedisRepositoryString _redisRepositoryString;
         private readonly IRedisRepositorySortedSet _redisRepositorySortedSet;
+        private readonly IScoreCalculator _scoreCalculator;
 
-        public SeedController(IRedisRepositoryString redisRepositoryString, IRedisRepositorySortedSet redisRepositorySortedSet)
+        public SeedController(IRedisRepositoryString redisRepositoryString, IRedisRepositorySortedSet redisRepositorySortedSet, IScoreCalculator scoreCalculator)
         {
             _redisRepositoryString = redisRepositoryString;
             _redisRepositorySortedSet = redisRepositorySortedSet;
+            _scoreCalculator = scoreCalculator;
         }
 
         public IActionResult Index()
@@ -60,7 +63,7 @@ namespace WebApp.Controllers
                 {
                     var key = $"{i}:{i+1}:seed_sorted_set";
                     var value = DummyObjects.GetListWithNValues(viewModel.NumberOfValuesInKey);
-                    _redisRepositorySortedSet.Insert(key, value, ScoreCalculator.ScoreYear1970());
+                    _redisRepositorySortedSet.Insert(key, value, _scoreCalculator.ScoreYear1970());
                 }
 
                 new SetTempDataMessage()

@@ -34,11 +34,12 @@ namespace WebApp
             //DI ~ Appsettings
             var appSettings = new AppSettings();
 
-            services.AddTransient<IRedisRepository>(sp => new RedisRepository.RedisRepository(appSettings.Connection));
-            services.AddTransient<IRedisRepositoryString>(sp => new RedisRepository.RedisRepositoryString(appSettings.Connection));
-            //services.AddTransient<IRedisRepositorySet>(sp => new RedisRepository.RedisRepositorySet(appSettings.Connection));
-            services.AddTransient<IRedisRepositorySortedSet>(sp => new RedisRepository.RedisRepositorySortedSet(appSettings.Connection));
+            services.AddTransient<IRedisRepository>(x => new RedisRepository.RedisRepository(appSettings.Connection));
+            services.AddTransient<IRedisRepositoryString>(x => new RedisRepository.RedisRepositoryString(appSettings.Connection));
+            //services.AddTransient<IRedisRepositorySet>(x => new RedisRepository.RedisRepositorySet(appSettings.Connection));
+            services.AddTransient<IRedisRepositorySortedSet>(x => new RedisRepository.RedisRepositorySortedSet(appSettings.Connection));
             services.AddTransient<IAppSettings>(x => appSettings);
+            services.AddTransient<IScoreCalculator>(x => new ScoreCalculator());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

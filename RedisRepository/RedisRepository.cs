@@ -71,11 +71,17 @@ namespace RedisRepository
         public IList<string> SelectListScan(string keyMatch, int maxResultsSoftLimit = 1000)
         {
             var list = new List<string>();
+            var count = 1000;
+
+            // Should the user limit the `maxResultsSoftLimit` it cannot be less than the `COUNT` value
+            // See `IRedisRepository.SelectListScan` for remarks on the `COUNT` parameter
+            if (count > maxResultsSoftLimit)
+                count = maxResultsSoftLimit;
 
             int nextCursor = 0;
             do
             {
-                var redisResult = _db.Execute("SCAN", new object[] { nextCursor.ToString(), "MATCH", keyMatch, "COUNT", 1000 });
+                var redisResult = _db.Execute("SCAN", new object[] { nextCursor.ToString(), "MATCH", keyMatch, "COUNT", count });
                 var innerResult = (RedisResult[])redisResult;
                 nextCursor = int.Parse((string)innerResult[0]);
                 var resultLines = ((string[])innerResult[1]).ToList();

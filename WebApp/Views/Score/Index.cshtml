@@ -1,0 +1,78 @@
+﻿@model ScoreViewModel
+
+@{
+    ViewData["Title"] = "Score Help";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Index" asp-controller="Score" method="post">
+    <input type="hidden" asp-for="ScoreYear1970" />
+    <input type="hidden" asp-for="ScoreYearOne" />
+
+    <div class="form-group row">
+        <label asp-for="UserInputDate" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="UserInputDate" class="form-control datepicker" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="UserInputDouble" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="UserInputDouble" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-2 col-sm-10">
+            <input type="submit" value="Calculate" class="btn btn-danger" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-2 col-sm-10">
+            <partial name="~/Views/Shared/_TempDataMessage.cshtml" />
+        </div>
+    </div>
+</form>
+
+<h2>Unix epoch</h2>
+<p>
+    Redis Administrator calculates its score using `Unix epoch`, for comparison I included an example below based on year one: `01/01/0001`
+</p>
+<p>
+    The Unix epoch (or Unix time or POSIX time or Unix timestamp) is the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap seconds (in ISO 8601: 1970-01-01T00:00:00Z).
+</p>
+
+<h2>Seconds Since Year</h2>
+<div class="container">
+    <div class="row">
+        <label asp-for="ScoreBaseDate" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            @Html.Raw(Model.ScoreBaseDate)
+        </div>
+    </div>
+    <div class="row">
+        <label asp-for="ScoreYear1970" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            @Html.Raw(Model.ScoreYear1970)
+        </div>
+    </div>
+    <div class="row">
+        <label asp-for="ScoreYearOne" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            @Html.Raw(Model.ScoreYearOne)
+        </div>
+    </div>
+</div>
+
+<h2>References</h2>
+<ul>
+    <li><a href="https://en.wikipedia.org/wiki/Unix_time" target="_blank">Wikipedia - Unix time</a></li>
+</ul>
+
+@section scripts {
+    <script>
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            uiLibrary: 'bootstrap4'
+        });
+    </script>
+}

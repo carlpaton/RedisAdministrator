@@ -1,26 +1,24 @@
-FROM microsoft/dotnet:sdk AS build-env
-WORKDIR /app
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+WORKDIR /source
 
-# Copy csproj and restore as distinct layers
-COPY ./*.sln ./
+# copy csproj and restore as distinct layers
+COPY *.sln .
 COPY ./Common/*.csproj ./Common/
 COPY ./IntegrationTests/*.csproj ./IntegrationTests/
 COPY ./RedisRepository/*.csproj ./RedisRepository/
 COPY ./WebApp/*.csproj ./WebApp/
 RUN dotnet restore
 
-# Copy everything else and build
+# copy everything else and build app
 COPY ./Common/. ./Common/
 COPY ./IntegrationTests/. ./IntegrationTests/
 COPY ./RedisRepository/. ./RedisRepository/
 COPY ./WebApp/. ./WebApp/
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c release -o /app
 
-# Unit tests
-#RUN dotnet test "./UnitTest/UnitTest.csproj" -c Release --no-build --no-restore
-
-# Build runtime image
-FROM microsoft/dotnet:aspnetcore-runtime
+# final stage/image
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim
 WORKDIR /app
-COPY --from=build-env /app/WebApp/out .
+COPY --from=build /app ./
 ENTRYPOINT ["dotnet", "WebApp.dll"]

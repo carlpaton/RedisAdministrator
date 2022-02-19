@@ -1,23 +1,21 @@
 ﻿using FluentAssertions;
+using RedisAdmin.Application.Common.Interfaces;
 using RedisAdmin.Infrastructure.IntegrationTests.Fixtures;
 using System;
 using Xunit;
 
 namespace RedisAdmin.Infrastructure.IntegrationTests.Features.Generic
 {
-    /// <summary>
-    /// This test has to be run in isolation as it will cause race conditions
-    /// </summary>
     [Collection("CollectionFixture")]
-    public class ClearTests : IClassFixture<GenericFixture>
+    public class ClearTests
     {
-        private readonly CollectionFixture _collectionFixture;
-        private readonly GenericFixture _genericFixture;
+        private readonly IRedisRepositoryGeneric _redisRepositoryGeneric;
+        private readonly IRedisRepositoryString _redisRepositoryString;
 
-        public ClearTests(CollectionFixture collectionFixture, GenericFixture genericFixture) 
+        public ClearTests(CollectionFixture collectionFixture) 
         {
-            _collectionFixture = collectionFixture;
-            _genericFixture = genericFixture;
+            _redisRepositoryGeneric = collectionFixture.RedisRepositoryGenericForClearTests;
+            _redisRepositoryString = collectionFixture.RedisRepositoryStringForClearTests;
         }
 
         [Fact]
@@ -25,29 +23,28 @@ namespace RedisAdmin.Infrastructure.IntegrationTests.Features.Generic
         {
             // Arrange
             var recordsToInsert = 5;
-            for (int i = 0; i < recordsToInsert; i++)
+            var searchOnAll = "*";
+
+            for (int i = 1; i < recordsToInsert; i++)
             {
-                _collectionFixture
-                    .RedisRepositoryString
+                _redisRepositoryString
                     .Insert(Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
             }
-            var expectedLargeKeyCount = _collectionFixture
-                .RedisRepositoryGeneric
-                .SelectListKeys("*") //keys will lock the database
+
+            var expectedLargeKeyCount = _redisRepositoryGeneric
+                .SelectListKeys(searchOnAll) //keys will lock the database
                 .Count;
 
             // Act
-            _collectionFixture
-                .RedisRepositoryGeneric
+            _redisRepositoryGeneric
                 .Clear();
 
-            var expectedZeroKeyCount = _collectionFixture
-                .RedisRepositoryGeneric
-                .SelectListKeys("*")
+            var expectedZeroKeyCount = _redisRepositoryGeneric
+                .SelectListKeys(searchOnAll)
                 .Count;
 
             // Assert
-            expectedLargeKeyCount.Should().BeGreaterThan(recordsToInsert); // GenericFixture will add atleast 1 record
+            expectedLargeKeyCount.Should().Be(recordsToInsert);
             expectedZeroKeyCount.Should().Be(0);
         }
     }

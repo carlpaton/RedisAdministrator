@@ -16,7 +16,10 @@ namespace RedisAdmin.Infrastructure.IntegrationTests.Fixtures
         private readonly RedisServerOptions _redisServerOptions;
         private readonly GenericOptions _genericOptions;
 
-        private IRedisRepositoryGeneric _redisRepository;
+        private IRedisRepositoryGeneric _redisRepositoryGenericForClearTests;
+        private IRedisRepositoryString _redisRepositoryStringForClearTests;
+
+        private IRedisRepositoryGeneric _redisRepositoryGeneric;
         private IRedisRepositoryString _redisRepositoryString;
         private IRedisRepositorySortedSet _redisRepositorySortedSet;
 
@@ -37,15 +40,43 @@ namespace RedisAdmin.Infrastructure.IntegrationTests.Fixtures
                 .Get<GenericOptions>();
         }
 
+        /// <summary>
+        /// The clear method will flush all keys on ALL endpoints.
+        /// This needs its own instance to test as this will cause race conditions / un-expected failure of other tests.
+        /// </summary>
+        public IRedisRepositoryGeneric RedisRepositoryGenericForClearTests
+        {
+            get
+            {
+                if (_redisRepositoryGenericForClearTests != null)
+                    return _redisRepositoryGenericForClearTests;
+
+                _redisRepositoryGenericForClearTests = new RedisRepositoryGeneric(_redisServerOptions.ConnectionString);
+                return _redisRepositoryGenericForClearTests;
+            }
+        }
+
+        public IRedisRepositoryString RedisRepositoryStringForClearTests
+        {
+            get
+            {
+                if (_redisRepositoryStringForClearTests != null)
+                    return _redisRepositoryStringForClearTests;
+
+                _redisRepositoryStringForClearTests = new RedisRepositoryString(_redisServerOptions.ConnectionString);
+                return _redisRepositoryStringForClearTests;
+            }
+        }
+
         public IRedisRepositoryGeneric RedisRepositoryGeneric
         {
             get
             {
-                if (_redisRepository != null)
-                    return _redisRepository;
+                if (_redisRepositoryGeneric != null)
+                    return _redisRepositoryGeneric;
 
-                _redisRepository = new RedisRepositoryGeneric(_redisServerOptions.ConnectionString);
-                return _redisRepository;
+                _redisRepositoryGeneric = new RedisRepositoryGeneric(_redisServerOptions.ConnectionString);
+                return _redisRepositoryGeneric;
             }
         }
 

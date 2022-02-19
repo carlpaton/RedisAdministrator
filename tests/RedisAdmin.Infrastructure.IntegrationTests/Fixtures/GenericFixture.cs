@@ -17,6 +17,16 @@ namespace RedisAdmin.Infrastructure.IntegrationTests.Fixtures
             _collectionFixture = collectionFixture;
         }
 
+        public string TestKey
+        {
+            get
+            {
+                return _collectionFixture
+                    .GenericOptions
+                    .TestKey;
+            }
+        }
+
         public Task DisposeAsync()
         {
             return Task.CompletedTask;

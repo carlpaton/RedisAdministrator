@@ -20,7 +20,7 @@
     Suggested redis keys are `object-type:id`, for this insert I used `1:2:seed_sorted_set` where 1 iterates to the given <code>n</code> and 2 is just 1++.
 </p>
 
-<form asp-action="Index" asp-controller="SeedStringType" method="post">
+<form asp-action="SortedSetType" asp-controller="Seed" method="post">
     <div class="form-group row">
         <label asp-for="NumberOfKeys" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">

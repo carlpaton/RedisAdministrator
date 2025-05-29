@@ -39,4 +39,6 @@ Now actually deploy
 
 Test the deployed image
 
-1. locally as `docker run --name red-admin-deploy -d -p 8083:80 --network redis-bridge-network --env REDIS_CONNECTION=red-srv,allowAdmin=true carlpaton/redis-administrator:dev`
+1. delete local image tagged as `carlpaton/redis-administrator:dev`
+1. run locally as `docker run --name red-admin-deploy -d -p 8083:80 --network redis-bridge-network --env REDIS_CONNECTION=red-srv,allowAdmin=true carlpaton/redis-administrator:dev` which should then pull from docker hub
+1. browse to http://localhost:8083

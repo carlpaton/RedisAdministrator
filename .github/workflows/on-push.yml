@@ -9,7 +9,7 @@
 
 # https://docs.github.com/en/actions/use-cases-and-examples/publishing-packages/publishing-docker-images
 
-name: Publish Docker image
+name: Publish Latest Docker Image
 
 on:
   push:

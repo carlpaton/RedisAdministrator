@@ -19,6 +19,7 @@ docker run --name red-admin -d -p 8081:80 --env REDIS_CONNECTION=red-srv,allowAd
 Pull requests welcome!
 
 - [Local Setup](./docs/local-setup.md)
+- [Redis Types](https://carlpaton.github.io/2022/02/redis-types/)
 
 ## Developers
 

@@ -12,7 +12,6 @@
 name: Publish Docker image
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - 'master'
@@ -43,7 +42,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: carlpaton/redis-administrator:develop
+          tags: carlpaton/redis-administrator:latest
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v2

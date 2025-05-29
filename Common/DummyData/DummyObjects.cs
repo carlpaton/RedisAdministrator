@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using System;
 using System.Collections.Generic;
 
@@ -15,7 +15,7 @@ namespace Common.DummyData
                 DateTime = DateTime.Now       
             };
             
-            return JsonConvert.SerializeObject(value);
+            return JsonSerializer.Serialize(value);
         }
 
         public static string GetListWithNValues(int numberOfObjects)
@@ -32,7 +32,7 @@ namespace Common.DummyData
                 });
             }  
             
-            return JsonConvert.SerializeObject(list);
+            return JsonSerializer.Serialize(list);
         }
     }
 }

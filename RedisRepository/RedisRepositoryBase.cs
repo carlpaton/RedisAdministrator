@@ -1,4 +1,5 @@
-﻿using RedisRepository.enums;
+﻿using Microsoft.Extensions.Options;
+using RedisRepository.enums;
 using RedisRepository.Interfaces;
 using StackExchange.Redis;
 using System;
@@ -7,14 +8,14 @@ using System.Linq;
 
 namespace RedisRepository
 {
-    public class RedisRepository : IRedisRepository
+    public class RedisRepositoryBase : IRedisRepositoryBase
     {
         private readonly IDatabase _db;
         private readonly IConnectionMultiplexer _connectionMultiplexer;
 
-        public RedisRepository(string connection)
+        public RedisRepositoryBase(IOptions<DatabaseOptions> options)
         {
-            _connectionMultiplexer = ConnectionMultiplexer.Connect(connection);
+            _connectionMultiplexer = ConnectionMultiplexer.Connect(options.Value.ConnectionString);
             _db = _connectionMultiplexer.GetDatabase();
         }
 

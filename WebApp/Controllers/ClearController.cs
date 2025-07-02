@@ -7,9 +7,9 @@ namespace WebApp.Controllers
 {
     public class ClearController : Controller
     {
-        private readonly IRedisRepository _redisRepository;
+        private readonly IRedisRepositoryBase _redisRepository;
 
-        public ClearController(IRedisRepository redisRepository)
+        public ClearController(IRedisRepositoryBase redisRepository)
         {
             _redisRepository = redisRepository;
         }

@@ -3,7 +3,7 @@
 ## Prerequisites
 Install the following
 
-1. [.Net SDK 5.0](https://dotnet.microsoft.com/en-us/download/dotnet/5.0)
+1. [.Net SDK 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 1. libman with `dotnet tool install -g Microsoft.Web.LibraryManager.Cli`
 1. [docker desktop](https://www.docker.com/products/docker-desktop/)
 
@@ -27,7 +27,7 @@ This deploys to https://hub.docker.com/, merging to master also triggers [this a
 I last did this with an integration from Github to Docker.com but they have since canned this feature and put it behind a paywall, I'll update here after I figure out how to do it.
 
 1. build image with `docker build -t redis-administrator:develop .`
-1. run it locally as `docker run --name red-admin-develop -d -p 8082:80 --network redis-bridge-network --env REDIS_CONNECTION=red-srv,allowAdmin=true redis-administrator:develop`
+1. run it locally as `docker run --name red-admin-develop -d -p 8082:80 --network redis-bridge-network --env Database__ConnectionString=red-srv,allowAdmin=true redis-administrator:develop`
 1. browse to http://localhost:8082
 
 Now actually deploy
@@ -40,5 +40,5 @@ Now actually deploy
 Test the deployed image
 
 1. delete local image tagged as `carlpaton/redis-administrator:develop`
-1. run locally as `docker run --name red-admin-deploy -d -p 8083:80 --network redis-bridge-network --env REDIS_CONNECTION=red-srv,allowAdmin=true carlpaton/redis-administrator:develop` which should then pull from docker hub
+1. run locally as `docker run --name red-admin-deploy -d -p 8083:80 --network redis-bridge-network --env Database__ConnectionString=red-srv,allowAdmin=true carlpaton/redis-administrator:develop` which should then pull from docker hub
 1. browse to http://localhost:8083

@@ -1,6 +1,7 @@
 ﻿using RedisRepository.Interfaces;
 using StackExchange.Redis;
 using System;
+using Microsoft.Extensions.Options;
 
 namespace RedisRepository
 {
@@ -8,9 +9,11 @@ namespace RedisRepository
     {
         private readonly IDatabase _db;
 
-        public RedisRepositoryString(string connection)
+        public RedisRepositoryString(IOptions<DatabaseOptions> options)
         {
-            _db = ConnectionMultiplexer.Connect(connection).GetDatabase();
+            _db = ConnectionMultiplexer
+                .Connect(options.Value.ConnectionString)
+                .GetDatabase();
         }
 
         public void Insert(string key, string value, double cacheMinuteTimeout = 0)

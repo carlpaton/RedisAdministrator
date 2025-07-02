@@ -8,9 +8,9 @@ namespace WebApp.Controllers
 {
     public class DeleteController : Controller
     {
-        private readonly IRedisRepository _redisRepository;
+        private readonly IRedisRepositoryBase _redisRepository;
 
-        public DeleteController(IRedisRepository redisRepository)
+        public DeleteController(IRedisRepositoryBase redisRepository)
         {
             _redisRepository = redisRepository;
         }

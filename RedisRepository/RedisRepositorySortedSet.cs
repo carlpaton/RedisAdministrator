@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Options;
 using RedisRepository.Interfaces;
 using StackExchange.Redis;
 
@@ -9,9 +10,11 @@ namespace RedisRepository
     {
         private readonly IDatabase _db;
 
-        public RedisRepositorySortedSet(string connection)
+        public RedisRepositorySortedSet(IOptions<DatabaseOptions> options)
         {
-            _db = ConnectionMultiplexer.Connect(connection).GetDatabase();
+            _db = ConnectionMultiplexer
+                .Connect(options.Value.ConnectionString)
+                .GetDatabase();
         }
 
         public bool Insert(string key, string value, double score)

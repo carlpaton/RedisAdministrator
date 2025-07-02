@@ -3,7 +3,7 @@
 ## Prerequisites
 Install the following
 
-1. [.Net SDK 5.0](https://dotnet.microsoft.com/en-us/download/dotnet/5.0)
+1. [.Net SDK 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 1. libman with `dotnet tool install -g Microsoft.Web.LibraryManager.Cli`
 1. [docker desktop](https://www.docker.com/products/docker-desktop/)
 

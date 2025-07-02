@@ -7,7 +7,7 @@ namespace RedisRepository.Interfaces
     /// <summary>
     /// Should work with all Redis types.
     /// </summary>
-    public interface IRedisRepository
+    public interface IRedisRepositoryBase
     {
         /// <summary>
         /// StackExchange.Redis.FlushAllDatabases

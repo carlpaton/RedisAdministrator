@@ -11,11 +11,11 @@ namespace WebApp.Controllers
 {
     public class DeleteByScoreController : Controller
     {
-        private readonly IRedisRepository _redisRepository;
+        private readonly IRedisRepositoryBase _redisRepository;
         private readonly IRedisRepositorySortedSet _redisRepositorySortedSet;
         private readonly int _defaultMaxResults = 1000;
 
-        public DeleteByScoreController(IRedisRepository redisRepository, IRedisRepositorySortedSet redisRepositorySortedSet)
+        public DeleteByScoreController(IRedisRepositoryBase redisRepository, IRedisRepositorySortedSet redisRepositorySortedSet)
         {
             _redisRepository = redisRepository;
             _redisRepositorySortedSet = redisRepositorySortedSet;

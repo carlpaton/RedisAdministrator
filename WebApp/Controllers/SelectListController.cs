@@ -9,11 +9,11 @@ namespace WebApp.Controllers
 {
     public class SelectListController : Controller
     {
-        private readonly IRedisRepository _redisRepository;
+        private readonly IRedisRepositoryBase _redisRepository;
         private readonly IRedisRepositoryString _redisRepositoryString;
         private readonly IRedisRepositorySortedSet _redisRepositorySortedSet;
 
-        public SelectListController(IRedisRepository redisRepository, IRedisRepositoryString redisRepositoryString, IRedisRepositorySortedSet redisRepositorySortedSet)
+        public SelectListController(IRedisRepositoryBase redisRepository, IRedisRepositoryString redisRepositoryString, IRedisRepositorySortedSet redisRepositorySortedSet)
         {
             _redisRepository = redisRepository;
             _redisRepositoryString = redisRepositoryString;

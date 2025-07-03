@@ -19,7 +19,7 @@ docker run --name red-admin -d -p 8081:80 --env Database__ConnectionString=red-s
 
 ## Contributing
 
-Pull requests welcome!
+Pull requests welcome, see [contributing](CONTRIBUTING.md) guidelines.
 
 - [Local Setup](./docs/local-setup.md)
 - [Redis Types](https://carlpaton.github.io/2022/02/redis-types/)

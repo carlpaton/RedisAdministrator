@@ -74,12 +74,20 @@
         </main>
     </div>
 
+    @{
+        var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+        var infoVersionAttr = assembly.GetCustomAttributes(typeof(System.Reflection.AssemblyInformationalVersionAttribute), false)
+            .Cast<System.Reflection.AssemblyInformationalVersionAttribute>()
+            .FirstOrDefault();
+        var version = infoVersionAttr?.InformationalVersion?.Split('+')[0] ?? assembly.GetName().Version.ToString();
+    }
+
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.ToString("yyyy") - <a asp-area="" asp-controller="Home" asp-action="Privacy">Redis Administrator</a>
             is powered by <a href="https://getbootstrap.com/docs/4.0/getting-started/introduction/" target="_blank">Bootstrap</a>
-            , <a href="https://github.com/StackExchange/StackExchange.Redis/" target="_blank">StackExchange.Redis</a> 
-            and .Net 7.0
+            and <a href="https://github.com/StackExchange/StackExchange.Redis/" target="_blank">StackExchange.Redis</a> 
+            v @version
         </div>
     </footer>
 

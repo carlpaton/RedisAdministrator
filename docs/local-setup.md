@@ -26,19 +26,19 @@ This deploys to https://hub.docker.com/, merging to master also triggers [this a
 
 I last did this with an integration from Github to Docker.com but they have since canned this feature and put it behind a paywall, I'll update here after I figure out how to do it.
 
-1. build image with `docker build -t redis-administrator:develop .`
-1. run it locally as `docker run --name red-admin-develop -d -p 8082:80 --network redis-bridge-network --env Database__ConnectionString=red-srv,allowAdmin=true redis-administrator:develop`
+1. build image with `docker build -t redis-administrator:test .`
+1. run it locally as `docker run --name red-admin-test -d -p 8082:80 --network redis-bridge-network --env Database__ConnectionString=red-srv,allowAdmin=true redis-administrator:test`
 1. browse to http://localhost:8082
 
 Now actually deploy
 
 1. `docker login`, one time device confirmation opens docker.com for you to confirm 
-1. tag the image `docker tag redis-administrator:develop carlpaton/redis-administrator:develop`
-1. now push `docker push carlpaton/redis-administrator:develop`
+1. tag the image `docker tag redis-administrator:test carlpaton/redis-administrator:test`
+1. now push `docker push carlpaton/redis-administrator:test`
 1. browse and check the tag exists at https://hub.docker.com/r/carlpaton/redis-administrator/
 
 Test the deployed image
 
-1. delete local image tagged as `carlpaton/redis-administrator:develop`
-1. run locally as `docker run --name red-admin-deploy -d -p 8083:80 --network redis-bridge-network --env Database__ConnectionString=red-srv,allowAdmin=true carlpaton/redis-administrator:develop` which should then pull from docker hub
+1. delete local image tagged as `carlpaton/redis-administrator:test`
+1. run locally as `docker run --name red-admin-deploy -d -p 8083:80 --network redis-bridge-network --env Database__ConnectionString=red-srv,allowAdmin=true carlpaton/redis-administrator:test` which should then pull from docker hub
 1. browse to http://localhost:8083

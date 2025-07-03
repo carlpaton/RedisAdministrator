@@ -1,5 +1,5 @@
 # Use the SDK image for the build stage
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 WORKDIR /app
 
 # Copy csproj files and restore as distinct layers
@@ -19,7 +19,7 @@ RUN dotnet publish ./WebApp/WebApp.csproj -c Release -o out
 # RUN dotnet test "./IntegrationTests/IntegrationTests.csproj" -c Release --no-build --no-restore
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
 # Copy the published output from the build-env stage
 COPY --from=build-env /app/out ./

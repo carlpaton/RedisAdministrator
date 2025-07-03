@@ -9,14 +9,17 @@ namespace IntegrationTests
     public class DeleteTest
     {
         readonly string connection = "localhost:6379,allowAdmin=true";
-        IRedisRepository redisRepository;
+        IRedisRepositoryBase redisRepository;
         IRedisRepositoryString redisRepositoryString;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            redisRepository = new RedisRepository.RedisRepository(connection);
-            redisRepositoryString = new RedisRepository.RedisRepositoryString(connection);
+            var options = Microsoft.Extensions.Options.Options.Create(
+                new RedisRepository.DatabaseOptions { ConnectionString = connection }
+            );
+            redisRepository = new RedisRepository.RedisRepositoryBase(options);
+            redisRepositoryString = new RedisRepository.RedisRepositoryString(options);
         }
 
         [TestMethod]

@@ -35,6 +35,12 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Extract version from csproj
+        id: get_version
+        run: |
+          VERSION=$(grep -m 1 '<Version>' ./WebApp/WebApp.csproj | sed -E 's/.*<Version>(.+)<\/Version>.*/\1/')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
@@ -42,7 +48,9 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: carlpaton/redis-administrator:latest
+          tags: |
+            carlpaton/redis-administrator:latest
+            carlpaton/redis-administrator:${{ steps.get_version.outputs.version }}
 
       # - name: Generate artifact attestation
       #   uses: actions/attest-build-provenance@v2

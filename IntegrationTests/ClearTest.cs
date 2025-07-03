@@ -7,12 +7,15 @@ namespace IntegrationTests
     public class ClearTest
     {
         readonly string connection = "localhost:6379,allowAdmin=true";
-        IRedisRepository redisRepository;
+        IRedisRepositoryBase redisRepository;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            redisRepository = new RedisRepository.RedisRepository(connection);
+            var options = Microsoft.Extensions.Options.Options.Create(
+                new RedisRepository.DatabaseOptions { ConnectionString = connection }
+            );
+            redisRepository = new RedisRepository.RedisRepositoryBase(options);
         }
 
         [TestMethod]

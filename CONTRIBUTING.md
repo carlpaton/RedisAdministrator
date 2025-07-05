@@ -4,7 +4,7 @@ Thank you for your interest in contributing to RedisAdministrator!
 
 ## How to Contribute
 
-1. **Fork the repository** and create your branch from `main`.
+1. **Fork the repository** and create your branch from `master`.
 2. **Make your changes** with clear, descriptive commit messages.
 3. **Update the version** in `WebApp/WebApp.csproj` if your changes introduce new features or breaking changes.
 4. **Test your changes** to ensure nothing is broken.
